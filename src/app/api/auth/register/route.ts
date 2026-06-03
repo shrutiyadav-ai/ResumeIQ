@@ -51,7 +51,7 @@ export async function POST(req: Request) {
   } catch (error: any) {
     console.error("[Auth] Registration exception detail:", error);
     const dbPath = process.env.DATABASE_URL || "file:./dev.db";
-    const detailedMessage = `Registration failed: ${error.message || "Internal Server Error"}. (Prisma client targeting SQLite database: ${dbPath})`;
+    const detailedMessage = `Registration failed: ${error.message || "Internal Server Error"}. (Prisma client database: ${dbPath})`;
     
     if (isConnectionError(error)) {
       return NextResponse.json(

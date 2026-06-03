@@ -36,25 +36,33 @@ export function isConnectionError(err: any): boolean {
   );
 }
 
-// Dynamically resolve absolute path for SQLite to avoid CWD mismatch issues in Next.js runtime
+// Dynamically resolve connection string and switch adapters based on database protocol
 const connectionString = process.env.DATABASE_URL || "file:./dev.db";
-let url = connectionString;
+const isPostgres = connectionString.startsWith("postgres:") || connectionString.startsWith("postgresql:");
 
-if (url.startsWith("file:")) {
-  const filePath = url.slice(5); // Remove "file:" prefix
-  const absolutePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
-  url = `file:${absolutePath.replace(/\\/g, "/")}`;
+let prisma: PrismaClient;
+
+if (isPostgres) {
+  console.log("[Prisma] Initializing Prisma Client using PostgreSQL database...");
+  prisma = globalForPrisma.prisma || new PrismaClient();
 } else {
-  url = `file:${path.resolve(process.cwd(), url).replace(/\\/g, "/")}`;
+  let url = connectionString;
+  if (url.startsWith("file:")) {
+    const filePath = url.slice(5); // Remove "file:" prefix
+    const absolutePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
+    url = `file:${absolutePath.replace(/\\/g, "/")}`;
+  } else {
+    url = `file:${path.resolve(process.cwd(), url).replace(/\\/g, "/")}`;
+  }
+
+  console.log(`[Prisma] Initializing Prisma Client using SQLite adapter with: ${url}`);
+  const adapter = new PrismaBetterSqlite3({ url });
+  prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
 }
-
-console.log(`[Prisma] Initializing real Prisma Client using SQLite adapter with: ${url}`);
-
-const adapter = new PrismaBetterSqlite3({ url });
-export const prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
 }
 
+export { prisma };
 export default prisma;
