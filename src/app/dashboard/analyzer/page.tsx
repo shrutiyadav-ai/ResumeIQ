@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -11,7 +11,7 @@ import {
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
 import confetti from "canvas-confetti";
 
-export default function AnalyzerPage() {
+function AnalyzerContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const sampleParam = searchParams.get("sample");
@@ -670,3 +670,19 @@ export default function AnalyzerPage() {
     </div>
   );
 }
+
+export default function AnalyzerPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#060608] text-white flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-neutral-400 text-sm">Loading Analyzer...</p>
+        </div>
+      </div>
+    }>
+      <AnalyzerContent />
+    </Suspense>
+  );
+}
+
