@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { Pool } from "pg";
 import path from "path";
 
 const globalForPrisma = globalThis as unknown as {
@@ -43,8 +45,10 @@ const isPostgres = connectionString.startsWith("postgres:") || connectionString.
 let prisma: PrismaClient;
 
 if (isPostgres) {
-  console.log("[Prisma] Initializing Prisma Client using PostgreSQL database...");
-  prisma = globalForPrisma.prisma || new PrismaClient();
+  console.log("[Prisma] Initializing Prisma Client using PostgreSQL database with pg adapter...");
+  const pool = new Pool({ connectionString });
+  const adapter = new PrismaPg(pool);
+  prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
 } else {
   let url = connectionString;
   if (url.startsWith("file:")) {
