@@ -1,8 +1,10 @@
 # ResumeIQ 🚀
 
+**🔗 Live URL:** [https://resume-iq-silk.vercel.app](https://resume-iq-silk.vercel.app)
+
 ResumeIQ is an advanced, AI-powered resume analysis and optimization platform. It helps job seekers evaluate their resumes against target job roles, matching keywords and skills to pass applicant tracking systems (ATS) and stand out to recruiters. 
 
-Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **Framer Motion**, and **Prisma with SQLite**, ResumeIQ provides a sleek, modern, and high-performance dashboard with instant feedback.
+Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **Framer Motion**, and **Prisma**, ResumeIQ provides a sleek, modern, and high-performance dashboard with instant feedback.
 
 ---
 
@@ -100,7 +102,7 @@ Start the Next.js development server:
 npm run dev
 ```
 
-The application will start running at [http://localhost:3005](http://localhost:3005).
+The application will start running locally at [http://localhost:3005](http://localhost:3005).
 
 ---
 
