@@ -1,0 +1,169 @@
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id              String           @id @default(cuid())
+  name            String?
+  email           String           @unique
+  emailVerified   DateTime?
+  image           String?
+  password        String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  accounts        Account[]
+  jobDescriptions JobDescription[]
+  resumes         Resume[]
+  sessions        Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model Resume {
+  id                 String              @id @default(cuid())
+  userId             String
+  name               String?
+  email              String?
+  phone              String?
+  skills             Json
+  experience         Json?
+  education          Json?
+  certifications     Json?
+  projects           Json?
+  rawText            String
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  analyses           Analysis[]
+  interviewQuestions InterviewQuestion[]
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  embeddings         ResumeEmbedding[]
+  roadmaps           Roadmap[]
+  skillReports       SkillReport[]
+}
+
+model JobDescription {
+  id           String        @id @default(cuid())
+  userId       String
+  title        String
+  company      String?
+  jdText       String
+  targetSkills Json
+  createdAt    DateTime      @default(now())
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skillReports SkillReport[]
+}
+
+model Analysis {
+  id                String   @id @default(cuid())
+  resumeId          String
+  targetRole        String
+  score             Int
+  keywordsScore     Int
+  formattingScore   Int
+  readabilityScore  Int
+  experienceScore   Int
+  skillsScore       Int
+  completenessScore Int
+  keywordsFound     Json
+  keywordsMissing   Json
+  weaknesses        Json
+  strengths         Json
+  improvements      Json
+  recruiterDecision Json
+  heatmapData       Json
+  createdAt         DateTime @default(now())
+  resume            Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model SkillReport {
+  id                String          @id @default(cuid())
+  resumeId          String
+  jobDescriptionId  String?
+  matchPercent      Int
+  commonSkills      Json
+  missingSkills     Json
+  recommendedSkills Json
+  createdAt         DateTime        @default(now())
+  jobDescription    JobDescription? @relation(fields: [jobDescriptionId], references: [id])
+  resume            Resume          @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model Roadmap {
+  id           String   @id @default(cuid())
+  resumeId     String
+  targetRole   String
+  beginner     Json
+  intermediate Json
+  advanced     Json
+  createdAt    DateTime @default(now())
+  resume       Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model InterviewQuestion {
+  id         String   @id @default(cuid())
+  resumeId   String
+  question   String
+  answer     String
+  type       String
+  difficulty String
+  category   String
+  aiTip      String?
+  createdAt  DateTime @default(now())
+  resume     Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}
+
+model ResumeEmbedding {
+  id        String   @id @default(cuid())
+  resumeId  String
+  section   String
+  content   String
+  vector    String?
+  createdAt DateTime @default(now())
+  resume    Resume   @relation(fields: [resumeId], references: [id], onDelete: Cascade)
+}

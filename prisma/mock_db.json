@@ -1,0 +1,611 @@
+{
+  "user": [
+    {
+      "id": "mock_user_1qx77c",
+      "name": "Test User",
+      "email": "test@example.com",
+      "password": "$2b$10$zPkDNv0oK4qb.gO0ZX/30.1GGX.MGimgZAUpBD.OgnSvW4o1UFn/q",
+      "createdAt": "2026-06-02T11:39:23.297Z",
+      "updatedAt": "2026-06-02T11:39:23.297Z"
+    }
+  ],
+  "account": [],
+  "session": [],
+  "verificationToken": [],
+  "passwordResetToken": [],
+  "resume": [
+    {
+      "id": "mock_resume_4u500s",
+      "userId": "mock_user_1qx77c",
+      "name": "JULIANA SILVA",
+      "email": "hello@reallygreatsite.com",
+      "phone": "123-456-7890",
+      "skills": [],
+      "experience": [],
+      "education": [
+        {
+          "school": "Academic Institution",
+          "degree": "Degree / Certification",
+          "period": "Completed",
+          "text": "2018 - 2021\nS K I L L S\nKnowledge of the local real\nestate market\nCommunication skills\nNegotiation skills\nProblem-solving skills\nOrganization and time\nmanagement skills\nW O R K E X P E R I E N C E\nReally Great Company\nJune 2024 - Present\nREAL ESTATE AGENT\nReally Great Company\nJune 2021 - 2022\nREAL ESTATE AGENT\nPrepared contracts and documents for transactions\nConducted market research on local real estate trends\nCompiled property information and photos\nManaged client database and contact information\nScheduled property tours and open houses\nP R O F I L E\nI am an experienced Real Estate Agent with a passion for\nhelping clients find their dream homes. I have extensive\nexperience in the industry, including more than 5 years\nworking as a real estate agent. I am knowledgeable about\nthe latest market trends and understand the nuances of\nthe real estate market. I pride myself on my ability to\nnegotiate the best deals for my clients and to navigate\ncomplex real estate agreements. I am highly organized,\ndetail-oriented, and have strong communication skills.\n123-456-7890\n123 Anywhere St., Any City\nhello@reallygreatsite.com\nreallygreatsite.com\nA W A R D S &\nC E R T I F I C A T I O N S\nLicensed Real Estate Agent\nCertified Real Estate Negotiator\nTop Sales Agent Award 2016\nB.A. in Business Administration\nC O N T A C T\nNegotiate contracts and complex real estate\ntransactions\nProvide excellent customer service to clients\nUpdate and maintain client files\nResearch and monitor the local real estate market\nDevelop marketing campaigns for properties\nUtilize social media platforms to market properties\nParticipate in open houses and home tours"
+        }
+      ],
+      "certifications": [],
+      "projects": [],
+      "rawText": "JULIANA SILVA\nReal Estate Agent\nE D U C A T I O N\nUniversity\n2018 - 2021\nS K I L L S\nKnowledge of the local real\nestate market\nCommunication skills\nNegotiation skills\nProblem-solving skills\nOrganization and time\nmanagement skills\nW O R K E X P E R I E N C E\nReally Great Company\nJune 2024 - Present\nREAL ESTATE AGENT\nReally Great Company\nJune 2021 - 2022\nREAL ESTATE AGENT\nPrepared contracts and documents for transactions\nConducted market research on local real estate trends\nCompiled property information and photos\nManaged client database and contact information\nScheduled property tours and open houses\nP R O F I L E\nI am an experienced Real Estate Agent with a passion for\nhelping clients find their dream homes. I have extensive\nexperience in the industry, including more than 5 years\nworking as a real estate agent. I am knowledgeable about\nthe latest market trends and understand the nuances of\nthe real estate market. I pride myself on my ability to\nnegotiate the best deals for my clients and to navigate\ncomplex real estate agreements. I am highly organized,\ndetail-oriented, and have strong communication skills.\n123-456-7890\n123 Anywhere St., Any City\nhello@reallygreatsite.com\nreallygreatsite.com\nA W A R D S &\nC E R T I F I C A T I O N S\nLicensed Real Estate Agent\nCertified Real Estate Negotiator\nTop Sales Agent Award 2016\nB.A. in Business Administration\nC O N T A C T\nNegotiate contracts and complex real estate\ntransactions\nProvide excellent customer service to clients\nUpdate and maintain client files\nResearch and monitor the local real estate market\nDevelop marketing campaigns for properties\nUtilize social media platforms to market properties\nParticipate in open houses and home tours",
+      "createdAt": "2026-06-02T15:14:02.228Z",
+      "updatedAt": "2026-06-02T15:14:02.228Z"
+    }
+  ],
+  "jobDescription": [],
+  "analysis": [
+    {
+      "id": "mock_analysis_kj50ti",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "score": 32,
+      "keywordsScore": 0,
+      "formattingScore": 55,
+      "readabilityScore": 80,
+      "experienceScore": 46,
+      "skillsScore": 0,
+      "completenessScore": 20,
+      "keywordsFound": [],
+      "keywordsMissing": [
+        "scalability",
+        "latency",
+        "microservices",
+        "unit tests",
+        "integration",
+        "refactoring",
+        "performance tuning",
+        "deployment pipeline",
+        "database optimization",
+        "agile methodology"
+      ],
+      "weaknesses": [
+        "Missing core technologies and foundational skills expected for Software Engineers.",
+        "ATS keyword match is low. Need to add terms like: React, Next.js, TypeScript.",
+        "Experience section contains passive phrasing. Incorporate verbs like 'spearheaded', 'engineered', or 'optimized'.",
+        "Lacks measurable achievements. Quantify your work (e.g., 'improved page speed by 25%' rather than just 'improved page speed').",
+        "Missing critical structural sections. Complete your experience, skills, projects, certifications sections."
+      ],
+      "strengths": [],
+      "improvements": [
+        {
+          "section": "Experience Section",
+          "weak": "Worked on software implementation and debugging.",
+          "improved": "Engineered robust software updates that resolved 12+ legacy bottlenecks, reducing error rates by 18%."
+        },
+        {
+          "section": "Projects Section",
+          "weak": "Created an ML model for predictions.",
+          "improved": "Designed a Random Forest classifier achieving 92.4% accuracy, deployed via Docker, cutting inference latency by 45ms."
+        }
+      ],
+      "recruiterDecision": {
+        "shortlist": false,
+        "confidence": 50,
+        "reasons": [
+          "Heuristic baseline evaluation"
+        ],
+        "concerns": [
+          "Recruiter API timeout fallback"
+        ]
+      },
+      "heatmapData": [
+        {
+          "name": "Experience",
+          "text": "No work history provided.",
+          "level": "weak",
+          "reasons": [
+            "Extremely sparse details",
+            "Passive formatting",
+            "No clear scope defined"
+          ]
+        },
+        {
+          "name": "Skills",
+          "text": "No skills section found.",
+          "level": "weak",
+          "reasons": [
+            "Missing fundamental tools for this career path",
+            "Skills are poorly documented"
+          ]
+        },
+        {
+          "name": "Education",
+          "text": "2018 - 2021\nS K I L L S\nKnowledge of the local real\nestate market\nCommunication skills\nNegotiation skills\nProblem-solving skills\nOrganization and time\nmanagement skills\nW O R K E X P E R I E N C E\nReally Great Company\nJune 2024 - Present\nREAL ESTATE AGENT\nReally Great Company\nJune 2021 - 2022\nREAL ESTATE AGENT\nPrepared contracts and documents for transactions\nConducted market research on local real estate trends\nCompiled property information and photos\nManaged client database and contact information\nScheduled property tours and open houses\nP R O F I L E\nI am an experienced Real Estate Agent with a passion for\nhelping clients find their dream homes. I have extensive\nexperience in the industry, including more than 5 years\nworking as a real estate agent. I am knowledgeable about\nthe latest market trends and understand the nuances of\nthe real estate market. I pride myself on my ability to\nnegotiate the best deals for my clients and to navigate\ncomplex real estate agreements. I am highly organized,\ndetail-oriented, and have strong communication skills.\n123-456-7890\n123 Anywhere St., Any City\nhello@reallygreatsite.com\nreallygreatsite.com\nA W A R D S &\nC E R T I F I C A T I O N S\nLicensed Real Estate Agent\nCertified Real Estate Negotiator\nTop Sales Agent Award 2016\nB.A. in Business Administration\nC O N T A C T\nNegotiate contracts and complex real estate\ntransactions\nProvide excellent customer service to clients\nUpdate and maintain client files\nResearch and monitor the local real estate market\nDevelop marketing campaigns for properties\nUtilize social media platforms to market properties\nParticipate in open houses and home tours",
+          "level": "strong",
+          "reasons": [
+            "Clear academic history",
+            "Degree and timeline documented"
+          ]
+        },
+        {
+          "name": "Projects & Certifications",
+          "text": "\n",
+          "level": "weak",
+          "reasons": [
+            "Missing projects or certifications, reducing ATS weights"
+          ]
+        }
+      ],
+      "createdAt": "2026-06-02T15:14:02.231Z",
+      "updatedAt": "2026-06-02T15:14:02.231Z"
+    }
+  ],
+  "skillReport": [
+    {
+      "id": "mock_skillReport_byyqsf",
+      "resumeId": "mock_resume_4u500s",
+      "matchPercent": 0,
+      "commonSkills": [],
+      "missingSkills": [
+        "scalability",
+        "latency",
+        "microservices",
+        "unit tests",
+        "integration",
+        "refactoring",
+        "performance tuning",
+        "deployment pipeline",
+        "database optimization",
+        "agile methodology"
+      ],
+      "recommendedSkills": [
+        "scalability",
+        "latency",
+        "microservices",
+        "unit tests",
+        "integration"
+      ],
+      "createdAt": "2026-06-02T15:14:02.234Z",
+      "updatedAt": "2026-06-02T15:14:02.234Z"
+    }
+  ],
+  "roadmap": [
+    {
+      "id": "mock_roadmap_iv3lzv",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:14:02.236Z",
+      "updatedAt": "2026-06-02T15:14:02.236Z"
+    },
+    {
+      "id": "mock_roadmap_119pzcff",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:14:50.400Z",
+      "updatedAt": "2026-06-02T15:14:50.400Z"
+    },
+    {
+      "id": "mock_roadmap_x04rti",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:14:50.753Z",
+      "updatedAt": "2026-06-02T15:14:50.753Z"
+    },
+    {
+      "id": "mock_roadmap_nccyt",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:17:20.985Z",
+      "updatedAt": "2026-06-02T15:17:20.985Z"
+    },
+    {
+      "id": "mock_roadmap_eu2kmg",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:17:21.350Z",
+      "updatedAt": "2026-06-02T15:17:21.350Z"
+    },
+    {
+      "id": "mock_roadmap_aovr19",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:17:22.912Z",
+      "updatedAt": "2026-06-02T15:17:22.912Z"
+    },
+    {
+      "id": "mock_roadmap_n5z8wo",
+      "resumeId": "mock_resume_4u500s",
+      "targetRole": "Software Engineer",
+      "beginner": [
+        {
+          "week": "Weeks 1-2",
+          "topic": "Modern Web Foundations",
+          "skills": [
+            "HTML5",
+            "CSS3",
+            "JavaScript (ES6+)",
+            "Git Basics"
+          ],
+          "details": "Study DOM manipulation, responsive layouts, CSS flexbox, and version control branches."
+        }
+      ],
+      "intermediate": [
+        {
+          "week": "Weeks 3-4",
+          "topic": "Frontend Frameworks & Types",
+          "skills": [
+            "React",
+            "Next.js",
+            "TypeScript",
+            "Tailwind CSS"
+          ],
+          "details": "Build single-page and server-side rendered apps. Implement strict interfaces."
+        }
+      ],
+      "advanced": [
+        {
+          "week": "Weeks 5-6",
+          "topic": "Backend API & Deployment Systems",
+          "skills": [
+            "Node.js",
+            "PostgreSQL",
+            "Docker",
+            "AWS Deployments"
+          ],
+          "details": "Implement RESTful and GraphQL APIs. Handle schema migrations, indexing, and Docker configs."
+        }
+      ],
+      "createdAt": "2026-06-02T15:17:23.091Z",
+      "updatedAt": "2026-06-02T15:17:23.091Z"
+    }
+  ],
+  "interviewQuestion": [
+    {
+      "id": "mock_interviewQuestion_glb3r",
+      "resumeId": "mock_resume_4u500s",
+      "question": "How do you optimize React render performance for a large data-table component?",
+      "answer": "Use virtualized lists (e.g., react-window), wrap items in React.memo, leverage useMemo for sorting calculations, and ensure functions are cached with useCallback.",
+      "type": "technical",
+      "difficulty": "medium",
+      "category": "Software Engineering",
+      "aiTip": "Focus on rendering bottlenecks and state localization strategies.",
+      "createdAt": "2026-06-02T15:14:02.238Z",
+      "updatedAt": "2026-06-02T15:14:02.238Z"
+    },
+    {
+      "id": "mock_interviewQuestion_scl7r",
+      "resumeId": "mock_resume_4u500s",
+      "question": "Explain the difference between L1 and L2 regularization.",
+      "answer": "L1 (Lasso) adds the absolute values of the weights as penalty, causing weights to become zero (sparse feature selection). L2 (Ridge) adds the squared values of weights, shrinking them near zero but not exactly.",
+      "type": "technical",
+      "difficulty": "easy",
+      "category": "Statistics",
+      "aiTip": "Mention the geometric interpretation (diamond vs circle intersection with loss contours).",
+      "createdAt": "2026-06-02T15:14:02.238Z",
+      "updatedAt": "2026-06-02T15:14:02.238Z"
+    },
+    {
+      "id": "mock_interviewQuestion_ja2pyh",
+      "resumeId": "mock_resume_4u500s",
+      "question": "Describe a time you disagreed with a product decision. How did you handle it?",
+      "answer": "Focus on data-driven communication. Present user research and core metrics to show the impact, but commit fully once a final decision is made by the team.",
+      "type": "behavioral",
+      "difficulty": "medium",
+      "category": "General",
+      "aiTip": "Use the STAR method: Situation, Task, Action, Result.",
+      "createdAt": "2026-06-02T15:14:02.238Z",
+      "updatedAt": "2026-06-02T15:14:02.238Z"
+    },
+    {
+      "id": "mock_interviewQuestion_2qxnj",
+      "resumeId": "mock_resume_4u500s",
+      "question": "How do you optimize React render performance for a large data-table component?",
+      "answer": "Use virtualized lists (e.g., react-window), wrap items in React.memo, leverage useMemo for sorting calculations, and ensure functions are cached with useCallback.",
+      "type": "technical",
+      "difficulty": "medium",
+      "category": "Software Engineering",
+      "aiTip": "Focus on rendering bottlenecks and state localization strategies.",
+      "createdAt": "2026-06-02T15:16:40.611Z",
+      "updatedAt": "2026-06-02T15:16:40.611Z"
+    },
+    {
+      "id": "mock_interviewQuestion_tilrlf",
+      "resumeId": "mock_resume_4u500s",
+      "question": "Explain the difference between L1 and L2 regularization.",
+      "answer": "L1 (Lasso) adds the absolute values of the weights as penalty, causing weights to become zero (sparse feature selection). L2 (Ridge) adds the squared values of weights, shrinking them near zero but not exactly.",
+      "type": "technical",
+      "difficulty": "easy",
+      "category": "Statistics",
+      "aiTip": "Mention the geometric interpretation (diamond vs circle intersection with loss contours).",
+      "createdAt": "2026-06-02T15:16:40.611Z",
+      "updatedAt": "2026-06-02T15:16:40.611Z"
+    },
+    {
+      "id": "mock_interviewQuestion_zph9qiq",
+      "resumeId": "mock_resume_4u500s",
+      "question": "Describe a time you disagreed with a product decision. How did you handle it?",
+      "answer": "Focus on data-driven communication. Present user research and core metrics to show the impact, but commit fully once a final decision is made by the team.",
+      "type": "behavioral",
+      "difficulty": "medium",
+      "category": "General",
+      "aiTip": "Use the STAR method: Situation, Task, Action, Result.",
+      "createdAt": "2026-06-02T15:16:40.611Z",
+      "updatedAt": "2026-06-02T15:16:40.611Z"
+    },
+    {
+      "id": "mock_interviewQuestion_fqk24s",
+      "resumeId": "mock_resume_4u500s",
+      "question": "How do you optimize React render performance for a large data-table component?",
+      "answer": "Use virtualized lists (e.g., react-window), wrap items in React.memo, leverage useMemo for sorting calculations, and ensure functions are cached with useCallback.",
+      "type": "technical",
+      "difficulty": "medium",
+      "category": "Software Engineering",
+      "aiTip": "Focus on rendering bottlenecks and state localization strategies.",
+      "createdAt": "2026-06-02T15:16:41.012Z",
+      "updatedAt": "2026-06-02T15:16:41.012Z"
+    },
+    {
+      "id": "mock_interviewQuestion_owt9z",
+      "resumeId": "mock_resume_4u500s",
+      "question": "Explain the difference between L1 and L2 regularization.",
+      "answer": "L1 (Lasso) adds the absolute values of the weights as penalty, causing weights to become zero (sparse feature selection). L2 (Ridge) adds the squared values of weights, shrinking them near zero but not exactly.",
+      "type": "technical",
+      "difficulty": "easy",
+      "category": "Statistics",
+      "aiTip": "Mention the geometric interpretation (diamond vs circle intersection with loss contours).",
+      "createdAt": "2026-06-02T15:16:41.013Z",
+      "updatedAt": "2026-06-02T15:16:41.013Z"
+    },
+    {
+      "id": "mock_interviewQuestion_rdz0bl",
+      "resumeId": "mock_resume_4u500s",
+      "question": "Describe a time you disagreed with a product decision. How did you handle it?",
+      "answer": "Focus on data-driven communication. Present user research and core metrics to show the impact, but commit fully once a final decision is made by the team.",
+      "type": "behavioral",
+      "difficulty": "medium",
+      "category": "General",
+      "aiTip": "Use the STAR method: Situation, Task, Action, Result.",
+      "createdAt": "2026-06-02T15:16:41.013Z",
+      "updatedAt": "2026-06-02T15:16:41.013Z"
+    }
+  ],
+  "resumeEmbedding": [
+    {
+      "id": "mock_resumeEmbedding_i02qhj",
+      "resumeId": "mock_resume_4u500s",
+      "section": "FullResume",
+      "content": "JULIANA SILVA\nReal Estate Agent\nE D U C A T I O N\nUniversity\n2018 - 2021\nS K I L L S\nKnowledge of the local real\nestate market\nCommunication skills\nNegotiation skills\nProblem-solving skills\nOrganization and time\nmanagement skills\nW O R K E X P E R I E N C E\nReally Great Company\nJune 2024 - Present\nREAL ESTATE AGENT\nReally Great Company\nJune 2021 - 2022\nREAL ESTATE AGENT\nPrepared contracts and documents for transactions\nConducted market research on local real estate trends\nCompiled property information and photos\nManaged client database and contact information\nScheduled property tours and open houses\nP R O F I L E\nI am an experienced Real Estate Agent with a passion for\nhelping clients find their dream homes. I have extensive\nexperience in the industry, including more than 5 years\nworking as a real estate agent. I am knowledgeable about\nthe latest market trends and understand the nuances of\nthe real estate market. I pride myself on my ability to\nnegotiate the best deals for my clients and to navigate\ncomplex real estate agreements. I am highly organized,\ndetail-oriented, and have strong communication skills.\n123-456-7890\n123 Anywhere St., Any City\nhello@reallygreatsite.com\nreallygreatsite.com\nA W A R D S &\nC E R T I F I C A T I O N S\nLicensed Real Estate Agent\nCertified Real Estate Negotiator\nTop Sales Agent Award 2016\nB.A. in Business Administration\nC O N T A C T\nNegotiate contracts and complex real estate\ntransactions\nProvide excellent customer service to clients\nUpdate and maintain client files\nResearch and monitor the local real estate market\nDevelop marketing campaigns for properties\nUtilize social media platforms to market properties\nParticipate in open houses and home tours",
+      "createdAt": "2026-06-02T15:14:02.240Z",
+      "updatedAt": "2026-06-02T15:14:02.240Z"
+    }
+  ]
+}
