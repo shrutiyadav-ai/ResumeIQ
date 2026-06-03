@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { AuthOptions, Provider } from "next-auth";
+import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
@@ -20,7 +20,7 @@ function isGoogleConfigured(): boolean {
 }
 
 // Build providers list dynamically
-const providers: Provider[] = [
+const providers: AuthOptions["providers"] = [
   CredentialsProvider({
     name: "Credentials",
     credentials: {
@@ -89,8 +89,6 @@ if (isGoogleConfigured()) {
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   debug: process.env.NODE_ENV === "development",
-  // trustHost allows NextAuth to accept request Host headers natively, resolving CSRF mismatch errors
-  trustHost: true,
   providers,
   session: {
     strategy: "jwt",
