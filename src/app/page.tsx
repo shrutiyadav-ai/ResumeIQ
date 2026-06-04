@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   Sparkles, FileText, Target, Briefcase, TrendingUp, GraduationCap, 
-  UserCheck, ArrowRight, Star, ShieldCheck, CheckCircle2, ChevronRight 
+  UserCheck, ArrowRight, Star, ShieldCheck, ChevronRight 
 } from "lucide-react";
 
 export default function LandingPage() {
@@ -48,7 +48,7 @@ export default function LandingPage() {
             <a href="#features" className="hover:text-white transition-colors">Features</a>
             <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
             <a href="#testimonials" className="hover:text-white transition-colors">Testimonials</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+
           </nav>
 
           <div className="flex items-center gap-4">
@@ -370,103 +370,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/40">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
-            Transparent, Simple Pricing
-          </h2>
-          <p className="text-neutral-400 max-w-md mx-auto text-sm">
-            Choose the plan that suits your job search velocity. Cancel anytime.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {/* Free Tier */}
-          <div className="p-8 rounded-2xl glass-panel flex flex-col justify-between border-neutral-850 hover:border-neutral-800 transition-all">
-            <div>
-              <div className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-2">Free</div>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-extrabold text-white">$0</span>
-                <span className="text-xs text-neutral-500">/ forever</span>
-              </div>
-              <p className="text-xs text-neutral-400 mb-6">Perfect for checking basic formats and proofreading.</p>
-              
-              <ul className="space-y-3 mb-8">
-                {["Basic Resume Parsing", "Formatting Score", "3 Resume Uploads / Month", "Generic Keyword Checklist"].map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-xs text-neutral-300">
-                    <CheckCircle2 className="w-4 h-4 text-violet-400 shrink-0" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Link 
-              href="/auth/register" 
-              className="w-full py-3 bg-neutral-900 hover:bg-neutral-850 text-white text-xs font-semibold rounded-xl text-center transition-all border border-neutral-800"
-            >
-              Analyze Free
-            </Link>
-          </div>
-
-          {/* Pro Tier (Featured) */}
-          <div className="p-8 rounded-2xl glass-panel border-violet-500/40 bg-neutral-950/80 relative flex flex-col justify-between shadow-2xl scale-105">
-            <div className="absolute top-0 right-6 -translate-y-1/2 bg-violet-600 text-white text-[10px] uppercase font-bold tracking-wider px-3 py-1 rounded-full shadow-lg">
-              Most Popular
-            </div>
-            <div>
-              <div className="text-sm font-semibold text-violet-400 uppercase tracking-wider mb-2">Pro</div>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-extrabold text-white">$19</span>
-                <span className="text-xs text-neutral-500">/ month</span>
-              </div>
-              <p className="text-xs text-neutral-400 mb-6">The standard selection for active job seekers.</p>
-              
-              <ul className="space-y-3 mb-8">
-                {["Unlimited Resume Analyses", "Full Skill Gap Reports", "AI Bullet Point Enhancer", "Detailed Timeline Roadmap", "Google OAuth Sync", "Role Specific Weighting"].map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-xs text-neutral-300">
-                    <CheckCircle2 className="w-4 h-4 text-violet-400 shrink-0" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Link 
-              href="/auth/register" 
-              className="w-full py-3 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-xl text-center transition-all shadow-md shadow-violet-900/20"
-            >
-              Start Pro Trial
-            </Link>
-          </div>
-
-          {/* Premium Tier */}
-          <div className="p-8 rounded-2xl glass-panel flex flex-col justify-between border-neutral-850 hover:border-neutral-800 transition-all">
-            <div>
-              <div className="text-sm font-semibold text-neutral-400 uppercase tracking-wider mb-2">Premium</div>
-              <div className="flex items-baseline gap-1 mb-4">
-                <span className="text-4xl font-extrabold text-white">$39</span>
-                <span className="text-xs text-neutral-500">/ month</span>
-              </div>
-              <p className="text-xs text-neutral-400 mb-6">Built for elite career switchers and multiple target roles.</p>
-              
-              <ul className="space-y-3 mb-8">
-                {["Everything in Pro", "pgvector Semantic Search", "Recruiter Simulator Mode", "Custom Interview Q&A Lists", "Resume Heatmap Analytics", "24/7 Priority API Queue"].map((feat, i) => (
-                  <li key={i} className="flex items-center gap-2.5 text-xs text-neutral-300">
-                    <CheckCircle2 className="w-4 h-4 text-violet-400 shrink-0" />
-                    <span>{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Link 
-              href="/auth/register" 
-              className="w-full py-3 bg-neutral-900 hover:bg-neutral-850 text-white text-xs font-semibold rounded-xl text-center transition-all border border-neutral-800"
-            >
-              Go Premium
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="relative z-10 border-t border-neutral-950 py-12 px-6 md:px-12 bg-neutral-950/40 text-neutral-500 text-xs">
