@@ -55,14 +55,33 @@ function isValidApiKey(key: string | undefined): boolean {
   return true;
 }
 
-const defaultOpenai = isValidApiKey(envApiKey) ? new OpenAI({ apiKey: envApiKey! }) : null;
+// Dynamically retrieves client and model
+function getClientAndModel(customApiKey?: string): { client: OpenAI | null; model: string } {
+  const activeKey = (customApiKey && isValidApiKey(customApiKey))
+    ? customApiKey.trim()
+    : (isValidApiKey(envApiKey) ? envApiKey!.trim() : "");
 
-// Dynamically retrieves client
-function getClient(customApiKey?: string): OpenAI | null {
-  if (customApiKey && isValidApiKey(customApiKey)) {
-    return new OpenAI({ apiKey: customApiKey.trim() });
+  if (!activeKey) {
+    return { client: null, model: "gpt-4o-mini" };
   }
-  return defaultOpenai;
+
+  const isOpenRouter = activeKey.startsWith("sk-or-");
+  const options: any = {
+    apiKey: activeKey,
+  };
+
+  if (isOpenRouter) {
+    options.baseURL = "https://openrouter.ai/api/v1";
+    options.defaultHeaders = {
+      "HTTP-Referer": "http://localhost:3005",
+      "X-Title": "ResumeIQ",
+    };
+  }
+
+  const client = new OpenAI(options);
+  const model = isOpenRouter ? "openai/gpt-4o-mini" : "gpt-4o-mini";
+
+  return { client, model };
 }
 
 
@@ -85,7 +104,7 @@ function getDeterministicMockEmbedding(text: string): number[] {
 }
 
 export async function generateEmbeddings(text: string, customApiKey?: string): Promise<number[]> {
-  const client = getClient(customApiKey);
+  const { client } = getClientAndModel(customApiKey);
   if (!client) {
     return getDeterministicMockEmbedding(text);
   }
@@ -102,7 +121,7 @@ export async function generateEmbeddings(text: string, customApiKey?: string): P
 }
 
 export async function suggestImprovements(resumeText: string, role: string, customApiKey?: string): Promise<ImprovementSuggestion[]> {
-  const client = getClient(customApiKey);
+  const { client, model } = getClientAndModel(customApiKey);
   if (!client) {
     return [
       {
@@ -128,12 +147,13 @@ export async function suggestImprovements(resumeText: string, role: string, cust
 
   try {
     const prompt = `You are a professional resume writer. Review this resume text for a "${role}" role. 
-    Provide 3 high-impact improvement suggestions for specific weak bullet points.
+    Analyze the work experience and project sections, identifying any weak bullet points.
+    Provide high-impact improvement suggestions for any weak bullet points detected (at least 3, up to as many as required based on the resume content).
     Return ONLY a JSON object containing a "suggestions" key with a list of suggestions matching the structure:
     {"suggestions": [{"section": "...", "weak": "...", "improved": "...", "impact": "..."}]}`;
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: model,
       messages: [
         { role: "system", content: "You output JSON objects." },
         { role: "user", content: `${prompt}\n\nResume Content:\n${resumeText}` }
@@ -150,7 +170,7 @@ export async function suggestImprovements(resumeText: string, role: string, cust
 }
 
 export async function simulateRecruiter(resumeText: string, jobText: string, role: string, customApiKey?: string): Promise<RecruiterSimulation> {
-  const client = getClient(customApiKey);
+  const { client, model } = getClientAndModel(customApiKey);
   if (!client) {
     const score = resumeText.length > 500 ? 82 : 55;
     return {
@@ -168,7 +188,7 @@ export async function simulateRecruiter(resumeText: string, jobText: string, rol
     {"shortlist": boolean, "confidence": number, "reasons": ["str"], "concerns": ["str"]}`;
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: model,
       messages: [
         { role: "system", content: "You output JSON objects." },
         { role: "user", content: `${prompt}\n\nJob Description:\n${jobText}\n\nResume Content:\n${resumeText}` }
@@ -189,7 +209,7 @@ export async function simulateRecruiter(resumeText: string, jobText: string, rol
 }
 
 export async function matchJobDescription(resumeText: string, jobText: string, role: string, customApiKey?: string): Promise<JDMatchResult> {
-  const client = getClient(customApiKey);
+  const { client, model } = getClientAndModel(customApiKey);
   if (!client) {
     return {
       matchScore: 82,
@@ -209,7 +229,7 @@ export async function matchJobDescription(resumeText: string, jobText: string, r
     {"matchScore": number, "keywordScore": number, "experienceScore": number, "skillScore": number, "educationScore": number, "explanation": "string"}`;
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: model,
       messages: [
         { role: "system", content: "You output JSON objects." },
         { role: "user", content: `${prompt}\n\nJob Description:\n${jobText}\n\nResume Content:\n${resumeText}` }
@@ -259,24 +279,25 @@ export async function generateRoadmap(missingSkills: string[], role: string, cus
 
   const currentRoadmap = defaultRoadmaps[role] || defaultRoadmaps["Software Engineer"];
 
-  const client = getClient(customApiKey);
+  const { client, model } = getClientAndModel(customApiKey);
   if (!client) {
     return currentRoadmap;
   }
 
   try {
-    const prompt = `Design a 3-stage custom learning roadmap for a candidate aiming to transition into a "${role}" role.
+    const prompt = `Design a highly-detailed and actionable 3-stage custom learning roadmap for a candidate transitioning into a "${role}" role.
     The candidate is currently missing these skills: ${missingSkills.join(", ")}.
-    Create milestones for Beginner (stage 1), Intermediate (stage 2), and Advanced (stage 3).
+    Create rich milestones for Beginner (stage 1: Weeks 1-2), Intermediate (stage 2: Weeks 3-5), and Advanced (stage 3: Weeks 6-8).
+    For each stage, provide highly specific learning topics, concrete skills to practice, recommended documentation/resources, and a practical mini-project to build.
     Return ONLY a JSON object matching this structure:
     {
       "beginner": [{"week": "Weeks 1-2", "topic": "string", "skills": ["str"], "details": "string"}],
-      "intermediate": [{"week": "Weeks 3-4", "topic": "string", "skills": ["str"], "details": "string"}],
-      "advanced": [{"week": "Weeks 5-6", "topic": "string", "skills": ["str"], "details": "string"}]
+      "intermediate": [{"week": "Weeks 3-5", "topic": "string", "skills": ["str"], "details": "string"}],
+      "advanced": [{"week": "Weeks 6-8", "topic": "string", "skills": ["str"], "details": "string"}]
     }`;
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: model,
       messages: [
         { role: "system", content: "You output JSON objects." },
         { role: "user", content: prompt }
@@ -319,20 +340,20 @@ export async function generateInterviewQuestions(resumeText: string, jobText: st
     }
   ];
 
-  const client = getClient(customApiKey);
+  const { client, model } = getClientAndModel(customApiKey);
   if (!client) {
     return defaultQuestions;
   }
 
   try {
-    const prompt = `Based on the following resume and job description, generate 5 interview questions for a "${role}".
-    Include: 2 technical, 2 behavioral, and 1 project-specific. Set difficulty (easy/medium/hard).
+    const prompt = `Based on the following resume and job description, generate 10 comprehensive interview questions for a "${role}".
+    Include: 4 technical, 4 behavioral, and 2 project-specific questions. Set difficulty (easy/medium/hard).
     Provide a comprehensive sample answer and an 'aiTip' coaching prompt for each question.
     Return ONLY a JSON object containing a "questions" key with a list of questions matching:
     {"questions": [{"question": "string", "answer": "string", "type": "technical|behavioral|project-based", "difficulty": "easy|medium|hard", "category": "string", "aiTip": "string"}]}`;
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: model,
       messages: [
         { role: "system", content: "You output JSON objects." },
         { role: "user", content: `${prompt}\n\nJob Description:\n${jobText}\n\nResume Content:\n${resumeText}` }

@@ -39,8 +39,8 @@ export default function SettingsPage() {
     const savedRole = localStorage.getItem("resumeiq_role") || "Software Engineer";
     setTargetRole(savedRole);
 
-    const isLight = document.documentElement.classList.contains("light");
-    setTheme(isLight ? "light" : "dark");
+    const savedTheme = localStorage.getItem("resumeiq_theme") || "dark";
+    setTheme(savedTheme);
   }, [session]);
 
   const handleSaveSettings = (e: React.FormEvent) => {
@@ -48,9 +48,10 @@ export default function SettingsPage() {
     setIsSaving(true);
     setSaveSuccess(false);
 
-    // Save API key and target role preferences to browser cache
+    // Save API key, target role, and theme preferences to browser cache
     localStorage.setItem("resumeiq_openai_key", apiKey.trim());
     localStorage.setItem("resumeiq_role", targetRole);
+    localStorage.setItem("resumeiq_theme", theme);
 
     // Toggle dark class
     if (theme === "light") {
@@ -60,6 +61,9 @@ export default function SettingsPage() {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
     }
+
+    // Trigger theme update broadcast across client modules
+    window.dispatchEvent(new Event("resumeiq-theme-change"));
 
     setTimeout(() => {
       setIsSaving(false);
@@ -72,8 +76,18 @@ export default function SettingsPage() {
     "Software Engineer",
     "ML Engineer",
     "Data Scientist",
+    "Devops Engineer",
+    "Cybersecurity Specialist",
+    "UX/UI Designer",
     "Product Manager",
-    "Business Analyst"
+    "Business Analyst",
+    "Project Manager",
+    "Marketing Manager",
+    "HR Specialist",
+    "Financial Analyst",
+    "Sales Executive",
+    "Operations Manager",
+    "Content Writer"
   ];
 
   return (
@@ -158,14 +172,21 @@ export default function SettingsPage() {
                   ].map(t => {
                     const Icon = t.icon;
                     const active = theme === t.id;
+                    
+                    const btnClass = active
+                      ? theme === "light"
+                        ? "bg-neutral-200 text-neutral-900 border border-neutral-300"
+                        : "bg-neutral-900 text-white border border-neutral-850"
+                      : theme === "light"
+                        ? "text-neutral-500 hover:text-neutral-800"
+                        : "text-neutral-500 hover:text-neutral-300";
+
                     return (
                       <button
                         key={t.id}
                         type="button"
                         onClick={() => setTheme(t.id)}
-                        className={`grow flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-[9px] font-bold uppercase transition-all cursor-pointer ${
-                          active ? "bg-neutral-900 text-white border border-neutral-800" : "text-neutral-500 hover:text-neutral-300"
-                        }`}
+                        className={`grow flex items-center justify-center gap-1.5 py-1.5 rounded-lg text-[9px] font-bold uppercase transition-all cursor-pointer ${btnClass}`}
                       >
                         <Icon className="w-3.5 h-3.5" /> {t.label}
                       </button>

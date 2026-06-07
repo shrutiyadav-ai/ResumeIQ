@@ -203,7 +203,7 @@ export default function LandingPage() {
       <section id="features" className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-900/40">
         <div className="text-center mb-16">
           <h2 className="font-display font-bold text-3xl sm:text-4xl text-white mb-4">
-            startup-grade Resume Optimization
+            Startup-grade Resume Optimization
           </h2>
           <p className="text-neutral-400 max-w-xl mx-auto text-sm sm:text-base">
             Get targeted features designed to evaluate your experience, locate missing credentials, and format like a pro.

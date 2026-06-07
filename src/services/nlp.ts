@@ -51,6 +51,18 @@ export const ROLE_KEYWORDS: Record<string, { skills: string[]; keywords: string[
     skills: ["Python", "R", "SQL", "Machine Learning", "Statistics", "Probability", "Tableau", "PowerBI", "Pandas", "NumPy", "Regression", "Clustering", "A/B Testing", "Data Visualization", "Big Data", "Spark", "Hadoop"],
     keywords: ["hypothesis", "exploratory", "predictive", "random forest", "decision tree", "data clean", "statistic", "metric", "time series", "correlat", "analy", "insight", "dashboard", "data-driven", "visualiz"]
   },
+  "Devops Engineer": {
+    skills: ["Docker", "Kubernetes", "AWS", "Terraform", "CI/CD", "Jenkins", "Linux", "Bash", "Ansible", "CloudFormation", "Prometheus", "Grafana", "Git"],
+    keywords: ["automation", "pipeline", "infrastructure", "deployment", "container", "orchestration", "cloud", "scaling", "monitoring", "configuration"]
+  },
+  "Cybersecurity Specialist": {
+    skills: ["Penetration Testing", "Wireshark", "Cryptography", "Firewalls", "SIEM", "Network Security", "Vulnerability Assessment", "Linux", "OWASP", "Metasploit"],
+    keywords: ["threat", "vulnerability", "incident response", "compliance", "audit", "breach", "firewall", "encryption", "protocol", "mitigation"]
+  },
+  "UX/UI Designer": {
+    skills: ["Figma", "Adobe XD", "Wireframing", "Prototyping", "User Research", "Information Architecture", "Usability Testing", "HTML/CSS", "Visual Design"],
+    keywords: ["user experience", "interface", "wireframe", "prototype", "persona", "flow", "design system", "component", "usability", "accessibility"]
+  },
   "Product Manager": {
     skills: ["Product Strategy", "Roadmap", "Agile", "Scrum", "Product Lifecycle", "A/B Testing", "Analytics", "User Research", "SQL", "Customer Feedback", "Wireframing", "Jira", "Confluence", "Market Analysis", "KPIs"],
     keywords: ["user stor", "cross-functional", "market", "product launch", "revenue", "conversion", "engagement", "prioriti", "stakeholder", "requirement", "sprint", "backlog", "roadmap"]
@@ -58,6 +70,34 @@ export const ROLE_KEYWORDS: Record<string, { skills: string[]; keywords: string[
   "Business Analyst": {
     skills: ["SQL", "Excel", "Tableau", "PowerBI", "Business Intelligence", "Requirements Gathering", "Process Mapping", "Agile", "User Stories", "Data Analysis", "SWOT Analysis", "Financial Modeling", "Jira"],
     keywords: ["requirement", "use case", "gap analysis", "stakeholder", "workflow", "process optimi", "cost-benefit", "dashboard", "analy", "document", "report"]
+  },
+  "Project Manager": {
+    skills: ["Scrum", "Agile", "JIRA", "PMP", "Risk Management", "Budgeting", "Scheduling", "Stakeholder Management", "MS Project", "Trello"],
+    keywords: ["sprint", "delivery", "stakeholder", "timeline", "resource", "scope", "roadmap", "milestone", "mitigation", "coordination"]
+  },
+  "Marketing Manager": {
+    skills: ["SEO", "SEM", "Google Analytics", "Content Marketing", "Social Media Marketing", "Email Marketing", "Brand Strategy", "Copywriting", "HubSpot", "CRM"],
+    keywords: ["campaign", "conversion", "traffic", "acquisition", "engagement", "optimization", "brand", "analytics", "lead", "growth"]
+  },
+  "HR Specialist": {
+    skills: ["Talent Acquisition", "Employee Relations", "Onboarding", "Recruiting", "Conflict Resolution", "HRIS", "Compliance", "Performance Management"],
+    keywords: ["recruitment", "sourcing", "retention", "policy", "interview", "workforce", "performance", "engagement", "relations", "benefits"]
+  },
+  "Financial Analyst": {
+    skills: ["Financial Modeling", "Excel", "Valuation", "Data Analysis", "SQL", "Python", "Portfolio Management", "Budgeting", "Forecasting", "Accounting"],
+    keywords: ["forecast", "budget", "revenue", "cost", "cash flow", "variance", "market", "portfolio", "risk", "profitability"]
+  },
+  "Sales Executive": {
+    skills: ["Lead Generation", "CRM", "Salesforce", "Negotiation", "Account Management", "Cold Calling", "Presentation", "Customer Relationship Management"],
+    keywords: ["pipeline", "quota", "conversion", "deal", "revenue", "customer", "lead", "pitch", "negotiation", "closing"]
+  },
+  "Operations Manager": {
+    skills: ["Process Optimization", "Supply Chain Management", "Logistics", "Budgeting", "Project Management", "Quality Control", "Lean Six Sigma"],
+    keywords: ["process", "efficiency", "supply chain", "logistics", "vendor", "cost reduction", "workflow", "optimization", "resource allocation"]
+  },
+  "Content Writer": {
+    skills: ["Copywriting", "SEO", "Content Strategy", "Editing", "Proofreading", "Creative Writing", "WordPress", "Technical Writing", "Research"],
+    keywords: ["article", "blog", "search engine", "editing", "storytelling", "audience", "newsletter", "publication", "style guide"]
   }
 };
 

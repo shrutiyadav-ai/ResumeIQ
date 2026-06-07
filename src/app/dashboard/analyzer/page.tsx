@@ -36,8 +36,18 @@ function AnalyzerContent() {
     "Software Engineer",
     "ML Engineer",
     "Data Scientist",
+    "Devops Engineer",
+    "Cybersecurity Specialist",
+    "UX/UI Designer",
     "Product Manager",
-    "Business Analyst"
+    "Business Analyst",
+    "Project Manager",
+    "Marketing Manager",
+    "HR Specialist",
+    "Financial Analyst",
+    "Sales Executive",
+    "Operations Manager",
+    "Content Writer"
   ];
 
   // Load sample content if triggered from dashboard
@@ -427,9 +437,9 @@ function AnalyzerContent() {
               </div>
 
               {/* Recruiter Simulation Box */}
-              <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[320px] justify-between">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between border-b border-neutral-900 pb-3">
+              <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[320px]">
+                <div className="space-y-4 flex flex-col h-full overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-neutral-900 pb-3 shrink-0">
                     <div>
                       <h3 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider">Recruiter Review Simulation</h3>
                       <p className="text-[10px] text-neutral-500 mt-0.5">Simulates hiring manager assessment</p>
@@ -437,7 +447,7 @@ function AnalyzerContent() {
                     <Award className="w-5 h-5 text-violet-400" />
                   </div>
 
-                  <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-6 shrink-0">
                     <div>
                       <div className="text-[10px] text-neutral-500 font-medium">Would Shortlist?</div>
                       <div className={`mt-1 inline-flex px-2.5 py-1 rounded-lg text-xs font-bold ${
@@ -457,7 +467,7 @@ function AnalyzerContent() {
                   </div>
 
                   {/* Cons & Pros */}
-                  <div className="grid grid-cols-2 gap-4 pt-2">
+                  <div className="grid grid-cols-2 gap-4 pt-2 overflow-y-auto pr-1 grow">
                     <div>
                       <div className="text-[9px] font-semibold text-emerald-400 uppercase tracking-wider mb-1.5">Top Reasons</div>
                       <ul className="space-y-1.5">
@@ -487,10 +497,10 @@ function AnalyzerContent() {
                 <span className="text-xs text-neutral-400 font-semibold uppercase tracking-wider mb-4">Parameter Breakdown</span>
                 <div className="grow w-full h-[220px]">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
+                    <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 10, left: 10, bottom: 5 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" />
                       <XAxis type="number" domain={[0, 100]} stroke="#6b7280" fontSize={8} tickLine={false} />
-                      <YAxis dataKey="name" type="category" stroke="#6b7280" fontSize={9} tickLine={false} width={65} />
+                      <YAxis dataKey="name" type="category" stroke="#6b7280" fontSize={9} tickLine={false} width={75} />
                       <Tooltip 
                         contentStyle={{ backgroundColor: "#0b0b0d", borderColor: "#1f2937", borderRadius: "12px" }}
                         itemStyle={{ fontSize: "10px", color: "#a78bfa" }}

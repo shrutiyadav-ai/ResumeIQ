@@ -50,29 +50,29 @@ export default function DashboardLayout({
   const sidebarWidth = isSidebarCollapsed ? "w-20" : "w-64";
 
   return (
-    <div className="min-h-screen flex bg-[#08080a] text-foreground relative">
+    <div className="min-h-screen flex bg-background text-foreground relative">
       <CommandPalette />
 
       {/* Desktop Sidebar */}
       <aside 
-        className={`hidden md:flex flex-col border-r border-neutral-900 bg-[#0b0b0d]/70 backdrop-blur-xl shrink-0 transition-all duration-300 relative z-30 ${sidebarWidth}`}
+        className={`hidden md:flex flex-col border-r border-border bg-card/70 backdrop-blur-xl shrink-0 transition-all duration-300 relative z-30 ${sidebarWidth}`}
       >
         {/* Toggle Collapse button */}
         <button
           onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
-          className="absolute right-[-12px] top-7 w-6 h-6 rounded-full border border-neutral-800 bg-[#0c0c0e] hover:bg-neutral-850 flex items-center justify-center text-neutral-400 hover:text-white cursor-pointer z-50 shadow-md"
+          className="absolute right-[-12px] top-7 w-6 h-6 rounded-full border border-border bg-card hover:bg-muted flex items-center justify-center text-neutral-400 hover:text-foreground cursor-pointer z-50 shadow-md"
         >
           {isSidebarCollapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
         </button>
 
         {/* Sidebar Header / Logo */}
-        <div className="h-16 flex items-center px-6 border-b border-neutral-900/60 shrink-0">
+        <div className="h-16 flex items-center px-6 border-b border-border/60 shrink-0">
           <Link href="/dashboard" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-md shadow-violet-950/40 shrink-0">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             {!isSidebarCollapsed && (
-              <span className="font-display font-bold text-base tracking-tight text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-neutral-350">
+              <span className="font-display font-bold text-base tracking-tight text-foreground bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground">
                 ResumeIQ
               </span>
             )}
@@ -84,12 +84,12 @@ export default function DashboardLayout({
           <div className="px-4 pt-4 pb-2">
             <button
               onClick={() => window.dispatchEvent(new KeyboardEvent("keydown", { ctrlKey: true, key: "k" }))}
-              className="w-full flex items-center justify-between px-3 py-2 bg-neutral-900 hover:bg-neutral-850 border border-neutral-850 rounded-xl text-left text-neutral-500 hover:text-neutral-300 transition-colors cursor-pointer text-xs"
+              className="w-full flex items-center justify-between px-3 py-2 bg-muted hover:bg-muted/80 border border-border rounded-xl text-left text-neutral-500 hover:text-neutral-300 transition-colors cursor-pointer text-xs"
             >
               <span className="flex items-center gap-2">
                 <Search className="w-3.5 h-3.5" /> Search tools...
               </span>
-              <kbd className="font-mono text-[9px] bg-neutral-950 px-1.5 py-0.5 border border-neutral-850 rounded">Ctrl K</kbd>
+              <kbd className="font-mono text-[9px] bg-card px-1.5 py-0.5 border border-border rounded">Ctrl K</kbd>
             </button>
           </div>
         )}
@@ -106,13 +106,13 @@ export default function DashboardLayout({
                 className={`w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl transition-all font-medium text-xs relative group ${
                   isActive 
                     ? "bg-violet-600/10 text-violet-400 border border-violet-500/10" 
-                    : "text-neutral-400 hover:text-white hover:bg-neutral-900/40 border border-transparent"
+                    : "text-neutral-400 hover:text-foreground hover:bg-muted border border-transparent"
                 }`}
               >
-                <Icon className={`w-4.5 h-4.5 shrink-0 ${isActive ? "text-violet-400" : "text-neutral-500 group-hover:text-white transition-colors"}`} />
+                <Icon className={`w-4.5 h-4.5 shrink-0 ${isActive ? "text-violet-400" : "text-neutral-500 group-hover:text-foreground transition-colors"}`} />
                 {!isSidebarCollapsed && <span>{item.name}</span>}
                 {isSidebarCollapsed && (
-                  <div className="absolute left-16 bg-neutral-950 border border-neutral-800 text-white text-[10px] rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity font-semibold shadow-xl whitespace-nowrap z-50">
+                  <div className="absolute left-16 bg-card border border-border text-foreground text-[10px] rounded px-2 py-1 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity font-semibold shadow-xl whitespace-nowrap z-50">
                     {item.name}
                   </div>
                 )}
@@ -122,14 +122,14 @@ export default function DashboardLayout({
         </nav>
 
         {/* User profile card */}
-        <div className="p-4 border-t border-neutral-900/85 bg-[#08080a]/40 shrink-0">
+        <div className="p-4 border-t border-border bg-background/40 shrink-0">
           {status === "loading" ? (
             <div className="flex items-center gap-3 animate-pulse">
-              <div className="w-9 h-9 bg-neutral-900 rounded-full" />
+              <div className="w-9 h-9 bg-muted rounded-full" />
               {!isSidebarCollapsed && (
                 <div className="grow space-y-1.5">
-                  <div className="w-16 h-3 bg-neutral-900 rounded" />
-                  <div className="w-24 h-2 bg-neutral-900 rounded" />
+                  <div className="w-16 h-3 bg-muted rounded" />
+                  <div className="w-24 h-2 bg-muted rounded" />
                 </div>
               )}
             </div>
@@ -141,7 +141,7 @@ export default function DashboardLayout({
                 </div>
                 {!isSidebarCollapsed && (
                   <div className="grow overflow-hidden text-left">
-                    <div className="text-xs font-semibold text-white truncate">{session?.user?.name || "User"}</div>
+                    <div className="text-xs font-semibold text-foreground truncate">{session?.user?.name || "User"}</div>
                     <div className="text-[10px] text-neutral-500 truncate">{session?.user?.email || "No email"}</div>
                   </div>
                 )}
@@ -149,7 +149,7 @@ export default function DashboardLayout({
               {!isSidebarCollapsed && (
                 <button
                   onClick={handleSignOut}
-                  className="w-full flex items-center justify-center gap-2 mt-2 py-2 border border-neutral-900 hover:bg-red-950/20 hover:text-red-400 text-neutral-500 text-xs rounded-xl transition-all cursor-pointer font-medium"
+                  className="w-full flex items-center justify-center gap-2 mt-2 py-2 border border-border hover:bg-destructive/10 hover:text-destructive text-neutral-500 text-xs rounded-xl transition-all cursor-pointer font-medium"
                 >
                   <LogOut className="w-3.5 h-3.5" /> Sign Out
                 </button>
@@ -160,16 +160,16 @@ export default function DashboardLayout({
       </aside>
 
       {/* Mobile Header */}
-      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#0b0b0d]/80 backdrop-blur-lg border-b border-neutral-900 z-40 px-4 flex items-center justify-between">
+      <div className="md:hidden fixed top-0 left-0 right-0 h-14 bg-card/80 backdrop-blur-lg border-b border-border z-40 px-4 flex items-center justify-between">
         <Link href="/dashboard" className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow">
             <Sparkles className="w-3.5 h-3.5 text-white" />
           </div>
-          <span className="font-display font-bold text-sm tracking-tight text-white">ResumeIQ</span>
+          <span className="font-display font-bold text-sm tracking-tight text-foreground">ResumeIQ</span>
         </Link>
         <button
           onClick={() => setIsMobileOpen(true)}
-          className="w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-white border border-neutral-800 rounded-lg cursor-pointer"
+          className="w-8 h-8 flex items-center justify-center text-neutral-400 hover:text-foreground border border-border rounded-lg cursor-pointer"
         >
           <Menu className="w-4 h-4" />
         </button>
@@ -193,18 +193,18 @@ export default function DashboardLayout({
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", bounce: 0.15, duration: 0.4 }}
-              className="relative w-72 bg-[#0b0b0d] border-r border-neutral-900 h-full flex flex-col p-5 z-10"
+              className="relative w-72 bg-card border-r border-border h-full flex flex-col p-5 z-10"
             >
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
-                  <span className="font-display font-bold text-base text-white">ResumeIQ</span>
+                  <span className="font-display font-bold text-base text-foreground">ResumeIQ</span>
                 </div>
                 <button
                   onClick={() => setIsMobileOpen(false)}
-                  className="w-7 h-7 flex items-center justify-center text-neutral-400 hover:text-white border border-neutral-800 rounded-lg cursor-pointer"
+                  className="w-7 h-7 flex items-center justify-center text-neutral-400 hover:text-foreground border border-border rounded-lg cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

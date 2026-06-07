@@ -64,7 +64,10 @@ async function extractPdfText(buffer: Buffer): Promise<string> {
   try {
     // Dynamic import to ensure it's resolved at runtime (not webpack-bundled)
     const pdfParseModule = await import("pdf-parse");
-    const PDFParse = pdfParseModule.PDFParse;
+    const PDFParse = pdfParseModule.PDFParse || (pdfParseModule as any).default?.PDFParse;
+    if (!PDFParse) {
+      throw new Error("PDFParse constructor not found on the imported module.");
+    }
 
     const parser = new PDFParse({ data: buffer });
     const result = await parser.getText();
@@ -93,7 +96,8 @@ async function extractPdfText(buffer: Buffer): Promise<string> {
  * Fallback PDF text extraction using pdfjs-dist directly.
  */
 async function extractPdfWithPdfjs(buffer: Buffer): Promise<string> {
-  const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  const pdfjsModule = await import("pdfjs-dist/legacy/build/pdf.mjs");
+  const pdfjsLib = pdfjsModule.getDocument ? pdfjsModule : (pdfjsModule as any).default;
   
   const uint8Array = new Uint8Array(buffer);
   const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
@@ -117,7 +121,11 @@ async function extractPdfWithPdfjs(buffer: Buffer): Promise<string> {
  */
 async function extractDocxText(buffer: Buffer): Promise<string> {
   try {
-    const mammoth = await import("mammoth");
+    const mammothModule = await import("mammoth");
+    const mammoth = mammothModule.extractRawText ? mammothModule : (mammothModule as any).default;
+    if (!mammoth || typeof mammoth.extractRawText !== "function") {
+      throw new Error("extractRawText function not found on mammoth module.");
+    }
     const result = await mammoth.extractRawText({ buffer });
     return result.value || "";
   } catch (error: any) {

@@ -16,6 +16,23 @@ export default function HistoryPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [historyList, setHistoryList] = useState<any[]>([]);
 
+  const [theme, setTheme] = useState("dark");
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("resumeiq_theme") || "dark";
+    setTheme(savedTheme);
+
+    const handleThemeChange = () => {
+      const updated = localStorage.getItem("resumeiq_theme") || "dark";
+      setTheme(updated);
+    };
+
+    window.addEventListener("resumeiq-theme-change", handleThemeChange);
+    return () => {
+      window.removeEventListener("resumeiq-theme-change", handleThemeChange);
+    };
+  }, []);
+
   useEffect(() => {
     // Load history list from local storage fallback
     setIsLoading(true);
@@ -121,18 +138,22 @@ export default function HistoryPage() {
                 return (
                   <div 
                     key={item.id}
-                    className="p-5 border border-neutral-900 bg-neutral-950/20 hover:bg-neutral-950/40 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors"
+                    className={`p-5 border ${
+                      theme === "light" 
+                        ? "border-neutral-200 bg-white/60 hover:bg-white" 
+                        : "border-neutral-900 bg-neutral-950/20 hover:bg-neutral-950/40"
+                    } rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors`}
                   >
                     <div className="space-y-1.5 text-left">
                       <div className="flex items-center gap-3">
-                        <h3 className="text-xs font-bold text-white">{item.name}</h3>
-                        <span className="text-[10px] text-neutral-500">•</span>
-                        <span className="text-[9px] text-neutral-400 font-mono flex items-center gap-1">
-                          <Calendar className="w-3 h-3 text-neutral-600" /> {item.date}
+                        <h3 className={`text-xs font-bold ${theme === "light" ? "text-neutral-900" : "text-white"}`}>{item.name}</h3>
+                        <span className={`text-[10px] ${theme === "light" ? "text-neutral-400" : "text-neutral-500"}`}>•</span>
+                        <span className={`text-[9px] ${theme === "light" ? "text-neutral-600" : "text-neutral-400"} font-mono flex items-center gap-1`}>
+                          <Calendar className={`w-3 h-3 ${theme === "light" ? "text-neutral-500" : "text-neutral-600"}`} /> {item.date}
                         </span>
                       </div>
-                      <div className="text-[10px] text-neutral-500">
-                        Target Role: <strong className="text-neutral-400">{item.role}</strong>
+                      <div className={`text-[10px] ${theme === "light" ? "text-neutral-600" : "text-neutral-500"}`}>
+                        Target Role: <strong className={theme === "light" ? "text-neutral-800" : "text-neutral-400"}>{item.role}</strong>
                       </div>
                     </div>
 
@@ -147,13 +168,21 @@ export default function HistoryPage() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleReanalyze(item.text, item.role)}
-                          className="px-3.5 py-2 bg-neutral-900 hover:bg-neutral-850 border border-neutral-850 text-white text-[10.5px] font-bold rounded-xl transition-all cursor-pointer flex items-center gap-1 hover:text-violet-400"
+                          className={`px-3.5 py-2 border rounded-xl text-[10.5px] font-bold transition-all cursor-pointer flex items-center gap-1 ${
+                            theme === "light"
+                              ? "bg-neutral-100 hover:bg-neutral-200 border-neutral-250 text-neutral-800 hover:text-violet-600"
+                              : "bg-neutral-900 hover:bg-neutral-850 border-neutral-850 text-white hover:text-violet-400"
+                          }`}
                         >
                           <RefreshCw className="w-3 h-3" /> Re-examine
                         </button>
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="p-2 border border-neutral-900 hover:border-red-500/10 text-neutral-600 hover:text-red-400 rounded-xl transition-all cursor-pointer"
+                          className={`p-2 border rounded-xl transition-all cursor-pointer ${
+                            theme === "light"
+                              ? "border-neutral-200 hover:border-red-200 text-neutral-500 hover:text-red-600 bg-neutral-50 hover:bg-red-50/10"
+                              : "p-2 border border-neutral-900 hover:border-red-500/10 text-neutral-600 hover:text-red-400"
+                          }`}
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>

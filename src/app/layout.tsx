@@ -29,7 +29,26 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${outfit.variable} h-full dark`}
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('resumeiq_theme') || 'dark';
+                if (theme === 'light') {
+                  document.documentElement.classList.add('light');
+                  document.documentElement.classList.remove('dark');
+                } else {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.classList.remove('light');
+                }
+              } catch (_) {}
+            `
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans antialiased text-foreground bg-background">
         <AuthProvider>{children}</AuthProvider>
       </body>
