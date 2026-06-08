@@ -156,12 +156,12 @@ export function parseAndAnalyzeResume(text: string, selectedRole: string): NLPAn
 
   // 2. Segment Sections
   const sectionKeywords = {
-    experience: ["experience", "employment", "history", "work", "professional", "career"],
-    education: ["education", "university", "college", "school", "academic", "qualification"],
-    skills: ["skills", "technologies", "expertise", "competencies", "tech stack", "tools"],
-    projects: ["projects", "personal projects", "portfolio", "side projects"],
-    certifications: ["certifications", "certs", "licenses", "awards", "achievements"],
-    summary: ["summary", "objective", "about", "profile", "introduction"]
+    summary: ["summary", "professional summary", "career summary", "about", "about me", "objective", "career objective", "profile", "personal profile", "executive summary", "introduction"],
+    experience: ["experience", "work experience", "professional experience", "employment", "employment history", "work history", "career history", "relevant experience", "professional background"],
+    education: ["education", "academic background", "academic qualifications", "academics", "educational background", "educational qualifications", "education history", "academic profile"],
+    skills: ["skills", "technical skills", "core skills", "key skills", "technologies", "expertise", "tech stack", "tools", "skills & tools", "skills and tools", "core competencies", "areas of expertise", "technologies & tools", "technologies and tools"],
+    projects: ["projects", "academic projects", "personal projects", "featured projects", "technical projects", "key projects", "side projects", "portfolio", "project work", "selected projects"],
+    certifications: ["certifications", "certs", "licenses", "awards", "achievements", "licenses & certifications", "licenses and certifications", "certifications & awards", "certifications and awards"]
   };
 
   const sections: Record<string, string[]> = {
@@ -176,8 +176,14 @@ export function parseAndAnalyzeResume(text: string, selectedRole: string): NLPAn
   let currentSection = "summary";
   for (const line of lines) {
     let sectionChanged = false;
+    const cleanLine = line
+      .trim()
+      .toLowerCase()
+      .replace(/^[^a-z0-9]+|[^a-z0-9]+$/gi, "") // Remove leading/trailing non-alphanumeric chars (like bullets, colons, hashes)
+      .trim();
+
     for (const [key, keywords] of Object.entries(sectionKeywords)) {
-      if (keywords.some(kw => new RegExp(`^\\b${kw}\\b`, "i").test(line)) && line.length < 40) {
+      if (keywords.includes(cleanLine) && line.length < 50) {
         currentSection = key;
         sectionChanged = true;
         break;
