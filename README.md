@@ -2,7 +2,7 @@
 
 **🔗 Live URL:** [https://resume-iq-weld-kappa.vercel.app](https://resume-iq-weld-kappa.vercel.app)
 
-ResumeIQ is an advanced, AI-powered resume analysis and optimization platform. It helps job seekers evaluate their resumes against target job roles, matching keywords and skills to pass applicant tracking systems (ATS) and stand out to recruiters. 
+ResumeIQ is an advanced, AI-powered resume analysis and optimization platform. It helps job seekers evaluate their resumes against target job roles, matching keywords and skills to pass applicant tracking systems (ATS), identify skill gaps, and stand out to recruiters.
 
 Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **Framer Motion**, and **Prisma**, ResumeIQ provides a sleek, modern, and high-performance dashboard with instant feedback.
 
@@ -10,18 +10,20 @@ Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **Fra
 
 ## ✨ Features
 
-- 📂 **Resume File Parser**: Instantly upload resumes in **PDF** or **DOCX** format. The backend extracts text securely using custom parsers (no third-party dependencies required).
+- 📂 **Resume File Parser**: Upload resumes in **PDF** or **DOCX** format. The backend extracts text securely using custom parsers with robust dynamic ESM/CommonJS module resolution checking to prevent serverless execution crashes.
 - 📊 **Local NLP Scoring Engine**: Calculates highly calibrated ATS scores across categories:
   - **Skills Score**: Match rate against role-specific skill dictionaries.
   - **Keyword Score**: Plural/stem matching of critical industry keywords.
   - **Readability & Completeness**: Analyzes structural flow, formatting, section presence, and email/phone extraction.
   - **Quantifiable Metrics**: Detects if achievements are backed by metrics and percentages.
 - 🎯 **Job Description (JD) Matcher**: Copy-paste any job description to get a side-by-side comparison. View common skills, missing skills, and recommendations to optimize your resume.
-- 🛣️ **Dynamic Career Roadmap**: Generates structured, level-based roadmaps (**Beginner**, **Intermediate**, **Advanced**) based on missing skills to help you level up your career.
-- 🎙️ **Interview Prep Hub**: Generates custom, tailored interview questions and high-quality answers based on the candidate's resume.
-- 🤖 **Recruiter Simulation (AI-powered)**: Evaluates shortlist probability, recruiter confidence, concerns, and decision-making arguments (falls back to a robust rule-based heuristic model if no OpenAI API key is supplied).
-- 🔒 **Secure Authentication**: Built-in credential sign-in and Google OAuth support using **NextAuth.js**.
-- ⚙️ **Custom settings**: Set your own OpenAI API key in the UI settings panel to customize the AI parser experience.
+- 🛣️ **Dynamic Career Roadmap**: Generates structured, level-based roadmaps (**Beginner: Weeks 1-2**, **Intermediate: Weeks 3-5**, **Advanced: Weeks 6-8**) based on missing skills, including concrete skills, recommended resources, and practical mini-projects to help you level up your career.
+- 🎙️ **Interview Prep Hub**: Generates 10 customized interview prep questions (4 technical, 4 behavioral, and 2 project-specific) and high-quality answers based on the candidate's resume and job description.
+- 🤖 **Recruiter Simulation (AI-powered)**: Evaluates shortlist probability, recruiter confidence, concerns, and decision-making arguments (falls back to a robust rule-based heuristic model if no OpenAI/OpenRouter API key is supplied).
+- ⚙️ **Custom API Configuration**: Set your own OpenAI API key or OpenRouter API key (prefixed with `sk-or-`) in the UI settings panel. The application dynamically adjusts the API endpoint and maps to the cost-efficient `openai/gpt-4o-mini` model.
+- 🎨 **Adaptive Theme Palette**: Sleek Dark and Light modes featuring hydration warning overrides, client-side mount synchronization hooks, and high-contrast color styling for metric stat cards, dates, icons, and action buttons.
+- 💼 **Expanded Career Calibration**: Support for 15 technical and non-technical career paths, including:
+  - *Software Engineer, ML Engineer, Data Scientist, DevOps Engineer, Cybersecurity Specialist, UX/UI Designer, Product Manager, Business Analyst, Project Manager, Marketing Manager, HR Specialist, Financial Analyst, Sales Executive, Operations Manager, and Content Writer*.
 
 ---
 
@@ -34,7 +36,7 @@ Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **Fra
 - **ORM**: [Prisma](https://www.prisma.io/)
 - **Database**: [SQLite](https://sqlite.org/) (Local development db file)
 - **Authentication**: [NextAuth.js](https://next-auth.js.org/)
-- **Parsers**: `pdf-parse` (PDF extraction) & `mammoth` (DOCX extraction)
+- **Parsers**: `pdf-parse` (PDF extraction) & `mammoth` (DOCX extraction) with dynamic module resolution fallbacks.
 
 ---
 
@@ -48,7 +50,7 @@ Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **Fra
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/shrutiyadav062106-ui/ResumeIQ.git
+git clone https://github.com/shrutiyadav-ai/ResumeIQ.git
 cd ResumeIQ
 ```
 
@@ -74,8 +76,9 @@ NEXTAUTH_SECRET="your-nextauth-secret-key-here"
 GOOGLE_CLIENT_ID="your-google-client-id-here.apps.googleusercontent.com"
 GOOGLE_CLIENT_SECRET="your-google-client-secret-here"
 
-# OpenAI Configuration (Optional, can also be configured via Settings in UI)
-OPENAI_API_KEY="sk-proj-your-openai-api-key"
+# OpenAI or OpenRouter API key configuration (can also be configured via Settings in UI)
+# Supports OpenRouter keys (sk-or-...) with automatic model routing to openai/gpt-4o-mini
+OPENAI_API_KEY="sk-or-v1-your-openrouter-key-here"
 
 # NextAuth trust host (resolves local CSRF mismatch issues)
 AUTH_TRUST_HOST=true

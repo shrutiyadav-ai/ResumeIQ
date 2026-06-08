@@ -199,8 +199,9 @@ body {
   color: #4b5563 !important;
 }
 
-.light .text-neutral-500 {
-  color: #6b7280 !important;
+.light .text-neutral-500,
+.light .text-neutral-600 {
+  color: #4b5563 !important;
 }
 
 /* Panel and card overrides */
@@ -231,8 +232,22 @@ body {
   background-color: #ffffff !important;
 }
 
+.light button.bg-neutral-900,
+.light a.bg-neutral-900,
 .light .bg-neutral-900 {
   background-color: #f3f4f6 !important;
+}
+
+.light button.bg-neutral-900,
+.light a.bg-neutral-900 {
+  color: #1f2937 !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+.light button.bg-neutral-900:hover,
+.light a.bg-neutral-900:hover {
+  background-color: #e5e7eb !important;
+  color: #6d28d9 !important;
 }
 
 .light .hover\:bg-neutral-850:hover {
