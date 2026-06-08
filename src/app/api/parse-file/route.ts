@@ -57,63 +57,22 @@ export async function POST(req: Request) {
 }
 
 /**
- * Extract text from a PDF buffer using pdf-parse v2 (PDFParse class).
- * Falls back gracefully if the main method fails.
+ * Extract text from a PDF buffer using unpdf (edge-compatible, zero native dependencies).
  */
 async function extractPdfText(buffer: Buffer): Promise<string> {
   try {
-    // Dynamic import to ensure it's resolved at runtime (not webpack-bundled)
-    const pdfParseModule = await import("pdf-parse");
-    const PDFParse = pdfParseModule.PDFParse || (pdfParseModule as any).default?.PDFParse;
-    if (!PDFParse) {
-      throw new Error("PDFParse constructor not found on the imported module.");
-    }
-
-    const parser = new PDFParse({ data: buffer });
-    const result = await parser.getText();
-    return result.text || "";
-  } catch (primaryError: any) {
-    console.error("[PDF] Primary pdf-parse extraction failed:", primaryError.message);
-    
-    // Fallback: try direct pdfjs-dist usage
-    try {
-      const text = await extractPdfWithPdfjs(buffer);
-      if (text && text.trim().length > 10) {
-        return text;
-      }
-    } catch (fallbackError: any) {
-      console.error("[PDF] Fallback pdfjs extraction also failed:", fallbackError.message);
-    }
-    
+    const { extractText, getDocumentProxy } = await import("unpdf");
+    const uint8Array = new Uint8Array(buffer);
+    const pdf = await getDocumentProxy(uint8Array);
+    const { text } = await extractText(pdf, { mergePages: true });
+    return text || "";
+  } catch (error: any) {
+    console.error("[PDF] unpdf extraction failed:", error.message);
     throw new Error(
       "Could not parse this PDF. It may be image-based (scanned), password-protected, or use an unsupported format. " +
       "Try saving it as a new PDF from your editor, or paste the resume text directly."
     );
   }
-}
-
-/**
- * Fallback PDF text extraction using pdfjs-dist directly.
- */
-async function extractPdfWithPdfjs(buffer: Buffer): Promise<string> {
-  const pdfjsModule = await import("pdfjs-dist/legacy/build/pdf.mjs");
-  const pdfjsLib = (pdfjsModule as any).getDocument ? pdfjsModule : (pdfjsModule as any).default;
-  
-  const uint8Array = new Uint8Array(buffer);
-  const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
-  const pdf = await loadingTask.promise;
-  
-  const textParts: string[] = [];
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const content = await page.getTextContent();
-    const pageText = content.items
-      .map((item: any) => item.str || "")
-      .join(" ");
-    textParts.push(pageText);
-  }
-  
-  return textParts.join("\n\n");
 }
 
 /**
