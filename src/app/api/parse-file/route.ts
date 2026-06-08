@@ -64,8 +64,8 @@ async function extractPdfText(buffer: Buffer): Promise<string> {
     const { extractText, getDocumentProxy } = await import("unpdf");
     const uint8Array = new Uint8Array(buffer);
     const pdf = await getDocumentProxy(uint8Array);
-    const { text } = await extractText(pdf, { mergePages: true });
-    return text || "";
+    const { text } = await extractText(pdf, { mergePages: false });
+    return Array.isArray(text) ? text.join("\n") : (text || "");
   } catch (error: any) {
     console.error("[PDF] unpdf extraction failed:", error.message);
     throw new Error(
