@@ -1,6 +1,6 @@
 # ResumeIQ 🚀
 
-**🔗 Live URL:** [https://resume-iq-weld-kappa.vercel.app](https://resume-iq-weld-kappa.vercel.app)
+**🔗 Live URL:** [https://resume-iq-red.vercel.app/](https://resume-iq-red.vercel.app/)
 
 ResumeIQ is an advanced, AI-powered resume analysis and optimization platform. It helps job seekers evaluate their resumes against target job roles, matching keywords and skills to pass applicant tracking systems (ATS), identify skill gaps, and stand out to recruiters.
 
