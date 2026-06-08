@@ -97,7 +97,7 @@ async function extractPdfText(buffer: Buffer): Promise<string> {
  */
 async function extractPdfWithPdfjs(buffer: Buffer): Promise<string> {
   const pdfjsModule = await import("pdfjs-dist/legacy/build/pdf.mjs");
-  const pdfjsLib = pdfjsModule.getDocument ? pdfjsModule : (pdfjsModule as any).default;
+  const pdfjsLib = (pdfjsModule as any).getDocument ? pdfjsModule : (pdfjsModule as any).default;
   
   const uint8Array = new Uint8Array(buffer);
   const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
@@ -122,7 +122,7 @@ async function extractPdfWithPdfjs(buffer: Buffer): Promise<string> {
 async function extractDocxText(buffer: Buffer): Promise<string> {
   try {
     const mammothModule = await import("mammoth");
-    const mammoth = mammothModule.extractRawText ? mammothModule : (mammothModule as any).default;
+    const mammoth = (mammothModule as any).extractRawText ? mammothModule : (mammothModule as any).default;
     if (!mammoth || typeof mammoth.extractRawText !== "function") {
       throw new Error("extractRawText function not found on mammoth module.");
     }
