@@ -39,7 +39,7 @@ export function isConnectionError(err: any): boolean {
 }
 
 // Dynamically resolve connection string and switch adapters based on database protocol
-const connectionString = process.env.DATABASE_URL || "file:./dev.db";
+const connectionString = process.env.DATABASE_URL || "postgresql://localhost:5432/db";
 const isPostgres = connectionString.startsWith("postgres:") || connectionString.startsWith("postgresql:");
 
 let prisma: PrismaClient;
