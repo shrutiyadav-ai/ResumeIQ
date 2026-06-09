@@ -145,7 +145,7 @@ export default function LandingPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed mb-10"
         >
-          Analyze your resume, beat ATS filters, identify skill gaps, and get personalized improvement suggestions.
+          Analyze your resume, best ATS filters, identify skill gaps, and get personalized improvement suggestions.
         </motion.p>
 
         <motion.div 
