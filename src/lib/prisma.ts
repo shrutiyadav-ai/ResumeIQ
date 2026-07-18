@@ -1,8 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { Pool } from "pg";
 import path from "path";
+import fs from "fs";
 
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient;
@@ -38,31 +37,57 @@ export function isConnectionError(err: any): boolean {
   );
 }
 
-// Dynamically resolve connection string and switch adapters based on database protocol
-const connectionString = process.env.DATABASE_URL || "postgresql://localhost:5432/db";
-const isPostgres = connectionString.startsWith("postgres:") || connectionString.startsWith("postgresql:");
+// Dynamically resolve connection string and handle SQLite file setup
+let connectionString = process.env.DATABASE_URL || "file:./dev.db";
+
+// Force SQLite file if a postgresql string was provided on Vercel project settings
+if (connectionString.startsWith("postgres:") || connectionString.startsWith("postgresql:")) {
+  console.log("[Prisma] Overriding PostgreSQL URL to SQLite file for local/offline runtime...");
+  connectionString = "file:./dev.db";
+}
 
 let prisma: PrismaClient;
 
-if (isPostgres) {
-  console.log("[Prisma] Initializing Prisma Client using PostgreSQL database with pg adapter...");
-  const pool = new Pool({ connectionString });
-  const adapter = new PrismaPg(pool);
-  prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
-} else {
-  let url = connectionString;
-  if (url.startsWith("file:")) {
-    const filePath = url.slice(5); // Remove "file:" prefix
-    const absolutePath = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
-    url = `file:${absolutePath.replace(/\\/g, "/")}`;
-  } else {
-    url = `file:${path.resolve(process.cwd(), url).replace(/\\/g, "/")}`;
-  }
+// Determine if we are on Vercel (read-only filesystem, need to write to /tmp)
+const isVercel = process.env.VERCEL === "1" || process.env.NOW_BUILDER === "1";
+let finalUrl = connectionString;
 
-  console.log(`[Prisma] Initializing Prisma Client using SQLite adapter with: ${url}`);
-  const adapter = new PrismaBetterSqlite3({ url });
-  prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
+if (finalUrl.startsWith("file:")) {
+  let dbFilePath = finalUrl.slice(5); // Remove "file:" prefix
+  
+  if (isVercel) {
+    const tmpDbPath = "/tmp/dev.db";
+    const srcDbPath = path.resolve(process.cwd(), "dev.db");
+    
+    console.log(`[Prisma] Serverless environment detected. Initializing database copy from ${srcDbPath} to ${tmpDbPath}...`);
+    try {
+      // Create empty db file in /tmp if it doesn't exist
+      if (!fs.existsSync(tmpDbPath)) {
+        if (fs.existsSync(srcDbPath)) {
+          fs.copyFileSync(srcDbPath, tmpDbPath);
+          console.log("[Prisma] Successfully copied seeded database to /tmp/dev.db");
+        } else {
+          // Initialize a blank file
+          fs.writeFileSync(tmpDbPath, "");
+          console.log("[Prisma] Created blank database file at /tmp/dev.db");
+        }
+      } else {
+        console.log("[Prisma] /tmp/dev.db already exists, reusing.");
+      }
+    } catch (e) {
+      console.error("[Prisma] Failed to copy database to /tmp:", e);
+    }
+    
+    finalUrl = `file:${tmpDbPath}`;
+  } else {
+    const absolutePath = path.isAbsolute(dbFilePath) ? dbFilePath : path.resolve(process.cwd(), dbFilePath);
+    finalUrl = `file:${absolutePath.replace(/\\/g, "/")}`;
+  }
 }
+
+console.log(`[Prisma] Initializing Prisma Client using SQLite adapter with: ${finalUrl}`);
+const adapter = new PrismaBetterSqlite3({ url: finalUrl });
+prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
@@ -70,3 +95,4 @@ if (process.env.NODE_ENV !== "production") {
 
 export { prisma };
 export default prisma;
+
