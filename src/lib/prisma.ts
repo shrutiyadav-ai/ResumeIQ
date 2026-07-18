@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { PrismaLibSql } from "@prisma/adapter-libsql";
 import path from "path";
 import fs from "fs";
 
@@ -46,8 +46,6 @@ if (connectionString.startsWith("postgres:") || connectionString.startsWith("pos
   connectionString = "file:./dev.db";
 }
 
-let prisma: PrismaClient;
-
 // Determine if we are on Vercel (read-only filesystem, need to write to /tmp)
 const isVercel = process.env.VERCEL === "1" || process.env.NOW_BUILDER === "1";
 let finalUrl = connectionString;
@@ -85,8 +83,14 @@ if (finalUrl.startsWith("file:")) {
   }
 }
 
-console.log(`[Prisma] Initializing Prisma Client using SQLite adapter with: ${finalUrl}`);
-const adapter = new PrismaBetterSqlite3({ url: finalUrl });
+let prisma: PrismaClient;
+
+// Set back to environment variable so Prisma Client reads it natively
+process.env.DATABASE_URL = finalUrl;
+
+console.log(`[Prisma] Initializing native Prisma Client using Libsql adapter with: ${finalUrl}`);
+const adapter = new PrismaLibSql({ url: finalUrl });
+
 prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
 
 if (process.env.NODE_ENV !== "production") {
@@ -95,4 +99,5 @@ if (process.env.NODE_ENV !== "production") {
 
 export { prisma };
 export default prisma;
+
 
