@@ -304,3 +304,59 @@ body {
 .light .bg-neutral-950\/15 {
   background-color: rgba(0, 0, 0, 0.02) !important;
 }
+
+/* =============================================
+   Mobile & Touch Optimizations
+   ============================================= */
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Minimum touch target size for interactive elements */
+button,
+a,
+[role="button"] {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Exception: inline links shouldn't force height */
+p a,
+li a,
+nav a {
+  min-height: unset;
+  display: inline;
+}
+
+/* Touch-friendly interactions */
+button,
+a {
+  touch-action: manipulation;
+}
+
+/* Prevent textarea horizontal resize on mobile */
+@media (max-width: 768px) {
+  textarea {
+    resize: vertical;
+  }
+}
+
+/* Smooth overscroll on mobile */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Fix potential flexbox overflow on mobile */
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+/* Ensure select elements look good on iOS */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+}

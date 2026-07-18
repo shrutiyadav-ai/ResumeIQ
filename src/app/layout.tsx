@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/components/AuthProvider";
@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   title: "ResumeIQ - Premium AI-Powered Resume Analyzer",
   description: "Beat ATS filters, detect technical and soft skill gaps, get recruiter simulation insights, and receive actionable resume bullet point rewrites.",
   keywords: ["AI Resume Parser", "ATS Resume Score", "Skill Gap Detection", "Recruiter Simulator", "Resume Review", "Job Description Matcher"],
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({

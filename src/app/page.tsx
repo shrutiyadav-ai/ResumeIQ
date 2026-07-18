@@ -2,14 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Sparkles, FileText, Target, Briefcase, TrendingUp, GraduationCap, 
-  UserCheck, ArrowRight, Star, ShieldCheck, Sun, Moon
+  UserCheck, ArrowRight, Star, ShieldCheck, Sun, Moon, Menu, X
 } from "lucide-react";
 
 export default function LandingPage() {
   const [theme, setThemeState] = useState("dark");
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   useEffect(() => {
     // Get saved theme preference or default to dark
@@ -66,7 +67,7 @@ export default function LandingPage() {
       <div className="absolute inset-0 grid-bg opacity-30 pointer-events-none" />
 
       {/* Navigation Header */}
-      <header className="sticky top-0 z-50 glass-panel border-b border-neutral-200/60 dark:border-neutral-900/60 py-4 px-6 md:px-12 backdrop-blur-md">
+      <header className="sticky top-0 z-50 glass-panel border-b border-neutral-200/60 dark:border-neutral-900/60 py-3 px-4 sm:py-4 sm:px-6 md:px-12 backdrop-blur-md">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-indigo-500 flex items-center justify-center shadow-md shadow-violet-950/40">
@@ -83,7 +84,7 @@ export default function LandingPage() {
             <a href="#testimonials" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Testimonials</a>
           </nav>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
@@ -100,7 +101,7 @@ export default function LandingPage() {
 
             <Link 
               href="/auth/login" 
-              className="text-sm font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors px-3 py-1.5"
+              className="hidden sm:block text-sm font-semibold text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors px-3 py-1.5"
             >
               Sign In
             </Link>
@@ -110,17 +111,74 @@ export default function LandingPage() {
             >
               Get Started
             </Link>
+
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
+              className="md:hidden p-2 rounded-lg border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all cursor-pointer"
+              aria-label="Open Menu"
+              type="button"
+            >
+              {isMobileNavOpen ? <X className="w-4.5 h-4.5" /> : <Menu className="w-4.5 h-4.5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Dropdown Nav */}
+        <AnimatePresence>
+          {isMobileNavOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25 }}
+              className="md:hidden overflow-hidden border-t border-neutral-200/60 dark:border-neutral-900/60 mt-3"
+            >
+              <div className="py-4 flex flex-col gap-1">
+                {[
+                  { label: "Features", href: "#features" },
+                  { label: "How It Works", href: "#how-it-works" },
+                  { label: "Testimonials", href: "#testimonials" },
+                ].map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileNavOpen(false)}
+                    className="px-3 py-3 rounded-lg text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <div className="mt-3 flex flex-col gap-2 px-3">
+                  <Link
+                    href="/auth/login"
+                    onClick={() => setIsMobileNavOpen(false)}
+                    className="w-full text-center py-2.5 text-sm font-semibold text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-800 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-900 transition-all"
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/auth/register"
+                    onClick={() => setIsMobileNavOpen(false)}
+                    className="w-full text-center py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 rounded-xl transition-all"
+                  >
+                    Get Started Free
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
+
       {/* Hero Section */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 pt-20 pb-24 md:pt-32 md:pb-36 flex flex-col items-center text-center">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 pt-14 pb-16 sm:pt-20 sm:pb-24 md:pt-32 md:pb-36 flex flex-col items-center text-center">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-500/20 text-xs font-semibold text-violet-600 dark:text-violet-400 mb-6 shadow-inner"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-50 dark:bg-violet-950/30 border border-violet-200 dark:border-violet-500/20 text-xs font-semibold text-violet-600 dark:text-violet-400 mb-5 shadow-inner"
         >
           <Sparkles className="w-3.5 h-3.5" />
           <span>SaaS AI Resume Analytics Platform</span>
@@ -130,7 +188,7 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight text-neutral-900 dark:text-white max-w-4xl leading-[1.1] mb-6"
+          className="font-display font-extrabold text-3xl sm:text-5xl md:text-6xl tracking-tight text-neutral-900 dark:text-white max-w-4xl leading-[1.1] mb-5"
         >
           Land More Interviews with{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 via-indigo-550 to-violet-600 dark:from-violet-400 dark:via-indigo-300 dark:to-violet-400 bg-size-200 animate-gradient-x">
@@ -143,54 +201,74 @@ export default function LandingPage() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed mb-10"
+          className="text-sm sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed mb-8"
         >
-          Analyze your resume, best ATS filters, identify skill gaps, and get personalized improvement suggestions.
+          Analyze your resume, beat ATS filters, identify skill gaps, and get personalized improvement suggestions.
         </motion.p>
 
         <motion.div 
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm sm:max-w-md mb-12"
         >
           <Link 
             href="/auth/register" 
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-violet-900/30 active:scale-[0.98] group cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white font-semibold rounded-xl text-sm transition-all shadow-lg shadow-violet-900/30 active:scale-[0.98] group cursor-pointer"
           >
             Analyze Resume Free
             <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link 
             href="/auth/login" 
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900 dark:hover:bg-neutral-850 border border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-white font-semibold rounded-xl text-sm transition-all active:scale-[0.98] cursor-pointer"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-900 dark:hover:bg-neutral-850 border border-neutral-200 dark:border-neutral-800 text-neutral-800 dark:text-white font-semibold rounded-xl text-sm transition-all active:scale-[0.98] cursor-pointer"
           >
-            Upload Resume
+            Sign In
           </Link>
         </motion.div>
 
-        {/* Floating Mockup Dashboard */}
+        {/* Floating Mockup Dashboard — hidden on xs, visible from sm */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="w-full max-w-5xl rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white/60 dark:bg-neutral-950/60 p-4 shadow-2xl relative z-20 group"
+          className="w-full max-w-5xl rounded-2xl border border-neutral-200 dark:border-neutral-850 bg-white/60 dark:bg-neutral-950/60 p-3 sm:p-4 shadow-2xl relative z-20 group"
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/10 to-indigo-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          <div className="rounded-xl overflow-hidden border border-neutral-200 dark:border-neutral-900 bg-[#fafafa] dark:bg-[#0c0c0e] aspect-[16/10] shadow-inner relative flex flex-col">
-            {/* Window bar */}
-            <div className="h-10 border-b border-neutral-200 dark:border-neutral-900 bg-neutral-100/50 dark:bg-[#08080a] flex items-center justify-between px-4 shrink-0">
-              <div className="flex items-center gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-neutral-350 dark:bg-neutral-800" />
-                <div className="w-3 h-3 rounded-full bg-neutral-350 dark:bg-neutral-800" />
-                <div className="w-3 h-3 rounded-full bg-neutral-350 dark:bg-neutral-800" />
-              </div>
-              <div className="text-[11px] font-mono text-neutral-400 dark:text-neutral-600">resumeiq.ai/dashboard</div>
-              <div className="w-12" />
+          {/* Window bar */}
+          <div className="rounded-t-xl border border-neutral-200 dark:border-neutral-900 bg-neutral-100/50 dark:bg-[#08080a] flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-0 sm:h-10">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-neutral-350 dark:bg-neutral-800" />
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-neutral-350 dark:bg-neutral-800" />
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-neutral-350 dark:bg-neutral-800" />
             </div>
+            <div className="text-[10px] sm:text-[11px] font-mono text-neutral-400 dark:text-neutral-600">resumeiq.ai/dashboard</div>
+            <div className="w-8 sm:w-12" />
+          </div>
 
+          {/* Mobile simplified preview */}
+          <div className="sm:hidden rounded-b-xl border border-t-0 border-neutral-200 dark:border-neutral-900 bg-[#fafafa] dark:bg-[#0c0c0e] p-4 space-y-3">
+            <div className="p-3 rounded-xl border border-neutral-200 dark:border-neutral-850 bg-neutral-50 dark:bg-neutral-900/40 flex items-center justify-between">
+              <div>
+                <div className="text-[10px] text-neutral-500 uppercase tracking-wider font-semibold">ATS Score</div>
+                <div className="text-2xl font-extrabold text-neutral-900 dark:text-white font-display mt-0.5">82%</div>
+              </div>
+              <div className="w-12 h-12 rounded-full border-4 border-violet-500/20 border-t-violet-500 flex items-center justify-center font-bold text-violet-500 dark:text-violet-400 text-sm">82</div>
+            </div>
+            <div className="p-3 rounded-xl border border-violet-200 dark:border-violet-950/40 bg-violet-50/50 dark:bg-violet-950/10">
+              <div className="text-[10px] text-violet-600 dark:text-violet-400 font-semibold mb-1">Recruiter Review → <span className="text-emerald-500">Shortlisted ✓</span></div>
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                <span className="text-[9px] px-2 py-0.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 rounded-full">🟢 React</span>
+                <span className="text-[9px] px-2 py-0.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 rounded-full">🟢 TypeScript</span>
+                <span className="text-[9px] px-2 py-0.5 bg-red-500/10 text-red-500 dark:text-red-400 border border-red-500/20 rounded-full">🔴 Docker</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop full preview */}
+          <div className="hidden sm:block rounded-b-xl overflow-hidden border border-t-0 border-neutral-200 dark:border-neutral-900 bg-[#fafafa] dark:bg-[#0c0c0e]">
             {/* Content Mockup */}
-            <div className="grow p-6 flex flex-col md:flex-row gap-6 text-left overflow-hidden">
+            <div className="p-4 sm:p-6 flex flex-col md:flex-row gap-6 text-left overflow-hidden">
               <div className="w-full md:w-1/3 flex flex-col gap-5 border-r border-neutral-200 dark:border-neutral-900/60 pr-5">
                 {/* Score */}
                 <div className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-850 bg-neutral-50/50 dark:bg-neutral-900/40 flex items-center justify-between">
@@ -245,10 +323,11 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
+
       {/* Features Section */}
-      <section id="features" className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-200 dark:border-neutral-900/40">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-neutral-900 dark:text-white mb-4">
+      <section id="features" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-200 dark:border-neutral-900/40">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="font-display font-bold text-2xl sm:text-4xl text-neutral-900 dark:text-white mb-4">
             Startup-grade Resume Optimization
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto text-sm sm:text-base">
@@ -332,9 +411,9 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-200 dark:border-neutral-900/40">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-neutral-900 dark:text-white mb-4">
+      <section id="how-it-works" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-200 dark:border-neutral-900/40">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="font-display font-bold text-2xl sm:text-4xl text-neutral-900 dark:text-white mb-4">
             How ResumeIQ Works
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 max-w-md mx-auto text-sm">
@@ -342,7 +421,7 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 relative">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 relative">
           <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-[1px] bg-neutral-200 dark:bg-neutral-900 z-0" />
           
           {[
@@ -353,20 +432,20 @@ export default function LandingPage() {
             { step: "05", title: "Optimize & Apply", desc: "Incorporate suggestions, download your update, and submit." }
           ].map((item, idx) => (
             <div key={idx} className="flex flex-col items-center text-center relative z-10">
-              <div className="w-12 h-12 rounded-full bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-850 flex items-center justify-center text-xs font-mono font-bold text-violet-600 dark:text-violet-400 mb-4 shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-neutral-850 flex items-center justify-center text-xs font-mono font-bold text-violet-600 dark:text-violet-400 mb-3 sm:mb-4 shadow-lg">
                 {item.step}
               </div>
-              <h3 className="font-semibold text-sm text-neutral-900 dark:text-white mb-1.5">{item.title}</h3>
-              <p className="text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-[180px]">{item.desc}</p>
+              <h3 className="font-semibold text-xs sm:text-sm text-neutral-900 dark:text-white mb-1.5">{item.title}</h3>
+              <p className="text-[10px] sm:text-xs text-neutral-600 dark:text-neutral-400 leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Testimonials */}
-      <section id="testimonials" className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-24 border-t border-neutral-200 dark:border-neutral-900/40">
-        <div className="text-center mb-16">
-          <h2 className="font-display font-bold text-3xl sm:text-4xl text-neutral-900 dark:text-white mb-4">
+      <section id="testimonials" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-24 border-t border-neutral-200 dark:border-neutral-900/40">
+        <div className="text-center mb-10 sm:mb-16">
+          <h2 className="font-display font-bold text-2xl sm:text-4xl text-neutral-900 dark:text-white mb-4">
             Loved by Job Seekers & Recruiters
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 max-w-md mx-auto text-sm">
@@ -417,8 +496,8 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-neutral-200 dark:border-neutral-950 py-12 px-6 md:px-12 bg-neutral-100/40 dark:bg-neutral-950/40 text-neutral-500 text-xs">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <footer className="relative z-10 border-t border-neutral-200 dark:border-neutral-950 py-10 px-4 sm:py-12 sm:px-6 md:px-12 bg-neutral-100/40 dark:bg-neutral-950/40 text-neutral-500 text-xs">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 text-center sm:text-left">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 rounded bg-white dark:bg-neutral-900 flex items-center justify-center border border-neutral-250 dark:border-neutral-800">
               <Sparkles className="w-3.5 h-3.5 text-neutral-500 dark:text-neutral-400" />
@@ -426,7 +505,7 @@ export default function LandingPage() {
             <span className="font-semibold text-neutral-800 dark:text-neutral-300">ResumeIQ</span>
           </div>
 
-          <div>&copy; 2026 ResumeIQ. Built for modern recruiters & candidates. All rights reserved.</div>
+          <div className="order-last sm:order-none">© 2026 ResumeIQ. Built for modern recruiters & candidates. All rights reserved.</div>
 
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-neutral-900 dark:hover:text-white transition-colors">Privacy</a>

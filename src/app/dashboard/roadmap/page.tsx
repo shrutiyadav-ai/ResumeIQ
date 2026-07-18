@@ -77,7 +77,7 @@ export default function RoadmapPage() {
   return (
     <div className="space-y-8 flex flex-col grow">
       {/* Title Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col gap-4">
         <div>
           <h1 className="text-2xl font-bold font-display text-white tracking-tight flex items-center gap-2">
             <GraduationCap className="w-6 h-6 text-violet-400" /> Personalized Learning Roadmap
@@ -88,7 +88,7 @@ export default function RoadmapPage() {
         </div>
         
         {/* Sample Loaders */}
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <button
             onClick={() => handleReloadWithSample("Software Engineer", ["TypeScript", "Docker", "AWS", "CI/CD"])}
             className="px-3 py-1.5 bg-neutral-900 hover:bg-neutral-850 border border-neutral-850 rounded-lg text-[10px] text-neutral-300 font-bold cursor-pointer"

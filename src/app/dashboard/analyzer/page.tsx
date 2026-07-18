@@ -399,9 +399,9 @@ function AnalyzerContent() {
             className="space-y-8"
           >
             {/* Row 1: Core ATS Gauge & Recruiter Simulation */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {/* ATS Gauge */}
-              <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col items-center justify-center text-center h-[320px]">
+              <div className="p-5 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col items-center justify-center text-center sm:col-span-1 h-auto sm:h-[320px] py-8 sm:py-0">
                 <span className="text-xs text-neutral-400 font-semibold uppercase tracking-wider mb-6">ATS Score Calibration</span>
                 
                 {/* SVG circular meter */}
@@ -437,7 +437,7 @@ function AnalyzerContent() {
               </div>
 
               {/* Recruiter Simulation Box */}
-              <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[320px]">
+              <div className="p-5 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col sm:h-[320px]">
                 <div className="space-y-4 flex flex-col h-full overflow-hidden">
                   <div className="flex items-center justify-between border-b border-neutral-900 pb-3 shrink-0">
                     <div>
@@ -493,7 +493,7 @@ function AnalyzerContent() {
               </div>
 
               {/* Parameter Breakdown Chart */}
-              <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[320px]">
+              <div className="p-5 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col sm:h-[320px] h-[260px]">
                 <span className="text-xs text-neutral-400 font-semibold uppercase tracking-wider mb-4">Parameter Breakdown</span>
                 <div className="grow w-full h-[220px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -513,9 +513,9 @@ function AnalyzerContent() {
             </div>
 
             {/* Row 2: Resume Heatmap Preview & Detail Cards */}
-            <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6">
               {/* Interactive Heatmap Preview */}
-              <div className="xl:col-span-2 p-6 rounded-2xl glass-panel bg-neutral-900/10 space-y-4">
+              <div className="xl:col-span-2 p-5 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 space-y-4">
                 <div className="flex items-center justify-between border-b border-neutral-900 pb-3">
                   <div>
                     <h3 className="text-sm font-bold font-display text-white">Resume Heatmap Preview</h3>

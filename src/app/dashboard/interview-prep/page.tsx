@@ -130,18 +130,18 @@ export default function InterviewPrepPage() {
         {/* Left columns: Questions Panel */}
         <div className="xl:col-span-2 space-y-6">
           {/* Tabs Filter Header */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-neutral-900 pb-3">
+          <div className="flex flex-col gap-3 border-b border-neutral-900 pb-3">
             {/* Type Filter */}
-            <div className="flex gap-1 bg-neutral-950 p-1 border border-neutral-850 rounded-xl">
+            <div className="flex gap-1 bg-neutral-950 p-1 border border-neutral-850 rounded-xl overflow-x-auto">
               {["All", "Technical", "Behavioral", "Project-Based"].map(t => (
                 <button
                   key={t}
                   onClick={() => { setSelectedType(t); setOpenQuestionIdx(null); }}
-                  className={`px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all cursor-pointer ${
+                  className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase transition-all cursor-pointer whitespace-nowrap ${
                     selectedType === t ? "bg-neutral-900 text-white border border-neutral-800" : "text-neutral-500 hover:text-neutral-300"
                   }`}
                 >
-                  {t === "All" ? "All Questions" : t}
+                  {t === "All" ? "All" : t}
                 </button>
               ))}
             </div>

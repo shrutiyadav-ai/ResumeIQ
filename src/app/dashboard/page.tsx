@@ -105,7 +105,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Grid: Stat cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
         {[
           { name: "Funnel Applications", value: stats.applications, icon: Briefcase, change: "+3 this week", isIncrease: true },
           { name: "Average ATS Score", value: `${stats.avgScore}%`, icon: FileCheck2, change: "+5% vs last week", isIncrease: true },
@@ -114,15 +114,15 @@ export default function DashboardPage() {
         ].map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <div key={i} className="p-5 rounded-2xl glass-panel relative overflow-hidden bg-neutral-900/30">
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs text-neutral-400 font-medium uppercase tracking-wider">{stat.name}</span>
-                <div className="w-8 h-8 rounded-lg bg-neutral-950 border border-neutral-850 flex items-center justify-center text-neutral-400">
-                  <Icon className="w-4.5 h-4.5" />
+            <div key={i} className="p-3 sm:p-5 rounded-2xl glass-panel relative overflow-hidden bg-neutral-900/30">
+              <div className="flex items-center justify-between mb-2 sm:mb-4">
+                <span className="text-[9px] sm:text-xs text-neutral-400 font-medium uppercase tracking-wider leading-tight">{stat.name}</span>
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-neutral-950 border border-neutral-850 flex items-center justify-center text-neutral-400 shrink-0">
+                  <Icon className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5" />
                 </div>
               </div>
-              <div className="text-2xl font-bold font-display text-white">{stat.value}</div>
-              <div className="flex items-center gap-1.5 mt-2.5 text-[10px] text-neutral-500 font-semibold">
+              <div className="text-xl sm:text-2xl font-bold font-display text-white">{stat.value}</div>
+              <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2.5 text-[9px] sm:text-[10px] text-neutral-500 font-semibold">
                 <span className="text-emerald-400">{stat.change}</span>
               </div>
             </div>
@@ -170,9 +170,9 @@ export default function DashboardPage() {
       )}
 
       {/* Dashboard Analytics charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* ATS Score Progress (Line Chart) */}
-        <div className="lg:col-span-2 p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[350px]">
+        <div className="lg:col-span-2 p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[350px]">
           <div className="flex items-center justify-between mb-6 shrink-0">
             <div>
               <h3 className="text-sm font-bold font-display text-white">ATS Score History</h3>
@@ -213,7 +213,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Competency Radar Graph */}
-        <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[350px]">
+        <div className="p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[350px]">
           <div className="mb-6 shrink-0">
             <h3 className="text-sm font-bold font-display text-white">Competency Alignment</h3>
             <p className="text-[10px] text-neutral-500 mt-0.5">Estimated strength across major technology layers</p>
@@ -231,7 +231,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Application Funnel */}
-        <div className="lg:col-span-2 p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[320px]">
+        <div className="lg:col-span-2 p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[320px]">
           <div className="mb-6 shrink-0">
             <h3 className="text-sm font-bold font-display text-white">Job Search Funnel</h3>
             <p className="text-[10px] text-neutral-500 mt-0.5">Tracking your active applications by funnel stage</p>
@@ -254,7 +254,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Active Checklist */}
-        <div className="p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[320px]">
+        <div className="p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[320px]">
           <div className="mb-4 shrink-0">
             <h3 className="text-sm font-bold font-display text-white">Action Steps</h3>
             <p className="text-[10px] text-neutral-500 mt-0.5">Recommended tasks to increase interview odds</p>
