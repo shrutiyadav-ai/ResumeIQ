@@ -83,7 +83,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="space-y-8 flex flex-col grow">
+    <div className="space-y-6 flex flex-col grow">
       {/* Title block */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -105,7 +105,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Grid: Stat cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {[
           { name: "Funnel Applications", value: stats.applications, icon: Briefcase, change: "+3 this week", isIncrease: true },
           { name: "Average ATS Score", value: `${stats.avgScore}%`, icon: FileCheck2, change: "+5% vs last week", isIncrease: true },
@@ -170,9 +170,9 @@ export default function DashboardPage() {
       )}
 
       {/* Dashboard Analytics charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
         {/* ATS Score Progress (Line Chart) */}
-        <div className="lg:col-span-2 p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[350px]">
+        <div className="lg:col-span-2 p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[300px] sm:h-[380px] lg:h-[400px]">
           <div className="flex items-center justify-between mb-6 shrink-0">
             <div>
               <h3 className="text-sm font-bold font-display text-white">ATS Score History</h3>
@@ -182,7 +182,7 @@ export default function DashboardPage() {
               Overall Improvement +29%
             </div>
           </div>
-          <div className="grow w-full h-[240px]">
+          <div className="grow w-full min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={defaultAtsTrend} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" />
@@ -213,12 +213,12 @@ export default function DashboardPage() {
         </div>
 
         {/* Competency Radar Graph */}
-        <div className="p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[350px]">
+        <div className="p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[300px] sm:h-[380px] lg:h-[400px]">
           <div className="mb-6 shrink-0">
             <h3 className="text-sm font-bold font-display text-white">Competency Alignment</h3>
             <p className="text-[10px] text-neutral-500 mt-0.5">Estimated strength across major technology layers</p>
           </div>
-          <div className="grow w-full flex items-center justify-center h-[240px]">
+          <div className="grow w-full flex items-center justify-center min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart cx="50%" cy="50%" outerRadius="75%" data={defaultSkillRadar}>
                 <PolarGrid stroke="rgba(255,255,255,0.04)" />
@@ -231,12 +231,12 @@ export default function DashboardPage() {
         </div>
 
         {/* Application Funnel */}
-        <div className="lg:col-span-2 p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[320px]">
+        <div className="lg:col-span-2 p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[300px] sm:h-[360px] lg:h-[380px]">
           <div className="mb-6 shrink-0">
             <h3 className="text-sm font-bold font-display text-white">Job Search Funnel</h3>
             <p className="text-[10px] text-neutral-500 mt-0.5">Tracking your active applications by funnel stage</p>
           </div>
-          <div className="grow w-full h-[210px]">
+          <div className="grow w-full min-h-0">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={defaultFunnel} margin={{ top: 5, right: 10, left: -20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.02)" />
@@ -254,7 +254,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Active Checklist */}
-        <div className="p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[280px] sm:h-[320px]">
+        <div className="p-4 sm:p-6 rounded-2xl glass-panel bg-neutral-900/10 flex flex-col h-[300px] sm:h-[360px] lg:h-[380px]">
           <div className="mb-4 shrink-0">
             <h3 className="text-sm font-bold font-display text-white">Action Steps</h3>
             <p className="text-[10px] text-neutral-500 mt-0.5">Recommended tasks to increase interview odds</p>
