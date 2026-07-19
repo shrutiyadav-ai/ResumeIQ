@@ -99,7 +99,7 @@ export default function DashboardLayout({
         )}
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto px-3 py-3 flex flex-col gap-0.5">
+        <nav className="flex-1 overflow-y-auto px-3 py-3 flex flex-col gap-1">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -227,7 +227,7 @@ export default function DashboardLayout({
               </div>
 
               {/* Drawer nav links */}
-              <nav className="flex-1 flex flex-col gap-0.5">
+              <nav className="flex-1 flex flex-col gap-1">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname === item.href;
