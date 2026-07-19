@@ -95,7 +95,7 @@ export default function DashboardLayout({
         )}
 
         {/* Navigation items */}
-        <nav className="grow px-4 py-4 space-y-1.5 overflow-y-auto">
+        <nav className="grow px-3 py-4 space-y-0.5 overflow-y-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = pathname === item.href;
@@ -103,10 +103,10 @@ export default function DashboardLayout({
               <Link
                 key={item.name}
                 href={item.href}
-                className={`w-full flex items-center gap-3.5 px-3.5 py-3 rounded-xl transition-all font-medium text-xs relative group ${
+                className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl transition-all font-medium text-xs relative group ${
                   isActive 
-                    ? "bg-violet-600/10 text-violet-400 border border-violet-500/10" 
-                    : "text-neutral-400 hover:text-foreground hover:bg-muted border border-transparent"
+                    ? "bg-violet-600/10 text-violet-400" 
+                    : "text-neutral-400 hover:text-foreground hover:bg-muted"
                 }`}
               >
                 <Icon className={`w-4.5 h-4.5 shrink-0 ${isActive ? "text-violet-400" : "text-neutral-500 group-hover:text-foreground transition-colors"}`} />
@@ -219,10 +219,10 @@ export default function DashboardLayout({
                     <Link
                       key={item.name}
                       href={item.href}
-                      className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all font-semibold text-xs border ${
+                      className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all font-semibold text-xs ${
                         isActive 
-                          ? "bg-violet-600/10 text-violet-400 border-violet-500/10" 
-                          : "text-neutral-400 hover:text-white border-transparent"
+                          ? "bg-violet-600/10 text-violet-400" 
+                          : "text-neutral-400 hover:text-white"
                       }`}
                     >
                       <Icon className="w-4 h-4 shrink-0 text-neutral-500" />
